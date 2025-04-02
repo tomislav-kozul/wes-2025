@@ -12,10 +12,15 @@
 #include "freertos/task.h"
 #include <stdio.h>
 
+//----------------------------- CUSTOM INCLUDES -------------------------------
+
+#include "gpio_led.h"
+#include "gpio_button.h"
+
 //----------------------------------- PINS ------------------------------------
-#define GPIO_RBG_RED (26U)
-#define GPIO_RBG_GREEN (27U)
-#define GPIO_RBG_BLUE (14U)
+#define GPIO_LED_RED (26U)
+#define GPIO_LED_GREEN (27U)
+#define GPIO_LED_BLUE (14U)
 
 #define GPIO_BUTTON_1 (36U)
 #define GPIO_BUTTON_2 (32U)
@@ -35,7 +40,7 @@
 //--------------------------------- COMPONENTS --------------------------------
 
 //---------------------------------- MACROS -----------------------------------
-#define DELAY_TIME_MS (5000U)
+#define DELAY_TIME_MS (1000U)
 #define DELAY_TIME_MS_DEBOUNCE (50U)
 
 #define GPIO_BIT_MASK(X) ((1ULL << (X)))
@@ -70,12 +75,17 @@
 
 void app_main(void)
 {
-    uint32_t counter = 0;
+    led_init(GPIO_LED_RED);
+    button1_init();
 
     for(;;)
     {
-        printf("[%ld] My first ESP32 code\n", counter++);
-
+        led_on(GPIO_LED_RED);
         vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
+
+        led_off(GPIO_LED_RED);
+        vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
+
+        printf("Button 1 pressed: %lu times.\n", button1_press_count);
     }
 }
