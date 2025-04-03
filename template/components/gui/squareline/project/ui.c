@@ -24,6 +24,7 @@ void ui_event_Label1(lv_event_t * e);
 lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
+lv_obj_t * ui_Label2;
 
 
 // SCREEN: ui_Screen1
@@ -323,8 +324,8 @@ void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_RELEASED) {
-        blue_button_pressed(e);
+    if(event_code == LV_EVENT_PRESSED) {
+        jebena_funkcija(e);
     }
 }
 

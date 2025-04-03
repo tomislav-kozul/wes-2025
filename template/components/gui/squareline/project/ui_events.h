@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 void btn_clicked(lv_event_t * e);
-void blue_button_pressed(lv_event_t * e);
+void jebena_funkcija(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

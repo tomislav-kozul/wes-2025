@@ -10,7 +10,7 @@
 
 //--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
-//#include "gpio_led.h"
+#include "gpio_led.h"
 #include "gui.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
