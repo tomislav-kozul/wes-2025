@@ -17,7 +17,7 @@
 //#include "gpio_led.h"
 //#include "gpio_button.h"
 //#include "gui/gui.h"
-#include "user_interface/user_interface.h"
+#include "user_interface.h"
 
 //----------------------------------- PINS ------------------------------------
 #define GPIO_LED_RED (26U)
