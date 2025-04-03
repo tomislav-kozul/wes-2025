@@ -12,6 +12,7 @@ file(GLOB_RECURSE SQUARELINE_INCLUDES
     "${SQUARELINE_DIR}/*.h"
 )
 
+set(COMPONENT_ADD_INCLUDEDIRS ".")
 foreach(_hdr ${SQUARELINE_INCLUDES})
     get_filename_component(_dir ${_hdr} DIRECTORY)
     list(APPEND COMPONENT_ADD_INCLUDEDIRS ${_dir})

@@ -42,7 +42,7 @@ void user_interface_init(void)
 
 
     // red poruka
-    p_user_interface_queue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(gui_app_event_t));
+    // p_user_interface_queue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(gui_app_event_t));
     if(p_user_interface_queue == NULL)
     {
         printf("User interface queue was not initialized successfully\n");
@@ -60,11 +60,12 @@ void user_interface_init(void)
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _user_interface_task(void *p_parameter)
 {
+    /*
     gui_app_event_t gui_event;
 
     for(;;)
     {
-        /* Blockingly wait on an event. */
+        // Blockingly wait on an event.
         if((p_user_interface_queue != NULL) && (xQueueReceive(p_user_interface_queue, &gui_event, portMAX_DELAY) == pdTRUE))
         {
             printf("GUI event received %d\n", gui_event);
@@ -84,6 +85,7 @@ static void _user_interface_task(void *p_parameter)
             }
         }
     }
+    */
 }
 
 //---------------------------- INTERRUPT HANDLERS -----------------------------
