@@ -14,8 +14,10 @@
 
 //----------------------------- CUSTOM INCLUDES -------------------------------
 
-#include "gpio_led.h"
-#include "gpio_button.h"
+//#include "gpio_led.h"
+//#include "gpio_button.h"
+//#include "gui/gui.h"
+#include "user_interface/user_interface.h"
 
 //----------------------------------- PINS ------------------------------------
 #define GPIO_LED_RED (26U)
@@ -75,10 +77,8 @@
 
 void app_main(void)
 {
-    led_init(GPIO_LED_RED);
-    button1_init();
 
-    for(;;)
+    /*for(;;)
     {
         led_on(GPIO_LED_RED);
         vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
@@ -87,5 +87,6 @@ void app_main(void)
         vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
 
         printf("Button 1 pressed: %lu times.\n", button1_press_count);
-    }
+    }*/
+    user_interface_init();
 }
