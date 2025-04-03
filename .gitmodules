@@ -1,0 +1,3 @@
+[submodule "template/components/lvgl"]
+	path = template/components/lvgl
+	url = https://github.com/lvgl/lvgl.git
