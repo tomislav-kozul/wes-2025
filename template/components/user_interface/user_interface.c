@@ -11,14 +11,14 @@
 //--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
 #include "gpio_led.h"
-#include "gui.h"
+#include "comms.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include <stdio.h>
 
 //---------------------------------- MACROS -----------------------------------
-#define USER_INTERFACE_QUEUE_SIZE (20U)     // veličina reda poruka
+
 //-------------------------------- DATA TYPES ---------------------------------
 
 //---------------------- PRIVATE FUNCTION PROTOTYPES --------------------------
@@ -33,24 +33,12 @@ static void _user_interface_task(void *p_parameter);
 static TaskHandle_t p_user_interface_task = NULL;
 
 //------------------------------- GLOBAL DATA ---------------------------------
-QueueHandle_t p_user_interface_queue = NULL;
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
-    gui_init(); // inicijalizacija grafičkog sučelja
-
-
-    // red poruka
-    // p_user_interface_queue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(gui_app_event_t));
-    if(p_user_interface_queue == NULL)
-    {
-        printf("User interface queue was not initialized successfully\n");
-        return;
-    }
-
     // izrada taska koji provjerava red poruka
-    if(pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
+    if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
     {
         printf("User interface task was not initialized successfully\n");
         return;
@@ -60,32 +48,27 @@ void user_interface_init(void)
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _user_interface_task(void *p_parameter)
 {
-    /*
-    gui_app_event_t gui_event;
+    EventBits_t uxBits;
 
-    for(;;)
+    for (;;)
     {
         // Blockingly wait on an event.
-        if((p_user_interface_queue != NULL) && (xQueueReceive(p_user_interface_queue, &gui_event, portMAX_DELAY) == pdTRUE))
+        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, GUI_APP_EVENT_BUTTON_JEBENI_PRESSED, pdTRUE, pdFALSE, portMAX_DELAY)))
         {
-            printf("GUI event received %d\n", gui_event);
+            printf("GUI event received %ld\n", uxBits);
 
-            switch(gui_event)
+            // TODO: Probably should check the flags with "&" and "==" operators in case multiple flags are set
+            switch (uxBits)
             {
-                case GUI_APP_EVENT_BUTTON_LED_ON_PRESSED:
-                    led_on(LED_BLUE);
-                    break;
-
-                case GUI_APP_EVENT_BUTTON_LED_OFF_PRESSED:
-                    led_off(LED_BLUE);
-                    break;
-                default:
-                    printf("Uknown GUI event\n");
-                    break;
+            case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
+                led_on(GPIO_LED_BLUE);
+                break;
+            default:
+                printf("Uknown GUI event\n");
+                break;
             }
         }
     }
-    */
 }
 
 //---------------------------- INTERRUPT HANDLERS -----------------------------

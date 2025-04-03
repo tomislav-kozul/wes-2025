@@ -16,7 +16,7 @@
 
 //#include "gpio_led.h"
 //#include "gpio_button.h"
-//#include "gui/gui.h"
+#include "gui.h"
 #include "user_interface.h"
 
 //----------------------------------- PINS ------------------------------------
@@ -89,4 +89,6 @@ void app_main(void)
         printf("Button 1 pressed: %lu times.\n", button1_press_count);
     }*/
     user_interface_init();
+    gui_init(); // inicijalizacija grafičkog sučelja
+
 }
