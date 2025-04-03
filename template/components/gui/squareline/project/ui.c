@@ -25,6 +25,8 @@ lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
 lv_obj_t * ui_Label2;
+lv_obj_t * ui_Label3;
+lv_obj_t * ui_ButtonPressCounter;
 
 
 // SCREEN: ui_Screen1
