@@ -24,6 +24,27 @@
  */
 static void _btn_1_isr(void *p_arg);
 
+/**
+ * @brief Callback function for button 2 press.
+ *
+ * @param [in] p_arg Pointer to the pin that caused the callback.
+ */
+static void _btn_2_isr(void *p_arg);
+
+/**
+ * @brief Callback function for button 3 press.
+ *
+ * @param [in] p_arg Pointer to the pin that caused the callback.
+ */
+static void _btn_3_isr(void *p_arg);
+
+/**
+ * @brief Callback function for button 4 press.
+ *
+ * @param [in] p_arg Pointer to the pin that caused the callback.
+ */
+static void _btn_4_isr(void *p_arg);
+
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
 
 //------------------------------- GLOBAL DATA ---------------------------------
@@ -66,11 +87,47 @@ esp_err_t button1_init(void)
     return button_init(GPIO_BUTTON_1, _btn_1_isr);
 }
 
+esp_err_t button2_init(void)
+{
+    return button_init(GPIO_BUTTON_2, _btn_2_isr);
+}
+
+esp_err_t button3_init(void)
+{
+    return button_init(GPIO_BUTTON_3, _btn_3_isr);
+}
+
+esp_err_t button4_init(void)
+{
+    return button_init(GPIO_BUTTON_4, _btn_4_isr);
+}
+
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 
 //---------------------------- INTERRUPT HANDLERS ------------------------------
 // Interrupt Service Routine for button 1.
 static void IRAM_ATTR _btn_1_isr(void *p_arg)
+{
+    (void)p_arg; // Suppress unused parameter warning
+    button1_press_count++;  // Increment the button 1 counter
+}
+
+// Interrupt Service Routine for button 2.
+static void IRAM_ATTR _btn_2_isr(void *p_arg)
+{
+    (void)p_arg; // Suppress unused parameter warning
+    button1_press_count++;  // Increment the button 1 counter
+}
+
+// Interrupt Service Routine for button 3.
+static void IRAM_ATTR _btn_3_isr(void *p_arg)
+{
+    (void)p_arg; // Suppress unused parameter warning
+    button1_press_count++;  // Increment the button 1 counter
+}
+
+// Interrupt Service Routine for button 4.
+static void IRAM_ATTR _btn_4_isr(void *p_arg)
 {
     (void)p_arg; // Suppress unused parameter warning
     button1_press_count++;  // Increment the button 1 counter
