@@ -27,7 +27,7 @@
 
 // Extern volatile variables for button press counts.
 // Use 'volatile' because they are modified within an ISR.
-extern volatile uint32_t button1_press_count;
+extern volatile uint32_t button_press_count[4];
 
 esp_err_t button1_init(void);
 esp_err_t button2_init(void);

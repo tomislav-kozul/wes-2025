@@ -63,7 +63,11 @@ static void _user_interface_task(void *p_parameter)
     {
         // Blockingly wait on an event.
         if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
-            GUI_APP_EVENT_BUTTON_JEBENI_PRESSED | GPIO_BUTTON_1_PRESS, 
+                GUI_APP_EVENT_BUTTON_JEBENI_PRESSED 
+                | GPIO_BUTTON_1_PRESS
+                | GPIO_BUTTON_2_PRESS
+                | GPIO_BUTTON_3_PRESS
+                | GPIO_BUTTON_4_PRESS, 
             pdTRUE, pdFALSE, portMAX_DELAY)))
         {
             printf("GUI event received %ld\n", uxBits);
@@ -75,7 +79,16 @@ static void _user_interface_task(void *p_parameter)
                 led_toggle(GPIO_LED_GREEN);
                 break;
             case GPIO_BUTTON_1_PRESS:
-                led_toggle(GPIO_LED_BLUE);
+                printf("1 - %lu\n", button_press_count[0]);
+                break;
+            case GPIO_BUTTON_2_PRESS:
+                printf("2 - %lu\n", button_press_count[1]);
+                break;
+            case GPIO_BUTTON_3_PRESS:
+                printf("3 - %lu\n", button_press_count[2]);
+                break;
+            case GPIO_BUTTON_4_PRESS:
+                printf("4 - %lu\n", button_press_count[3]);
                 break;
             default:
                 printf("Uknown GUI event\n");

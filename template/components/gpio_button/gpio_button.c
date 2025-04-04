@@ -128,7 +128,10 @@ static void _btn_1_cb(TimerHandle_t xTimer)
     if (gpio_get_level(GPIO_BUTTON_1))
     {
         button_press_count[0]++;
-        printf("BTN1 pressed. Count = %lu\n", (unsigned long)button_press_count[0]);
+        xEventGroupSetBits(
+            xGuiButtonEventGroup, 
+            GPIO_BUTTON_1_PRESS);
+        //printf("BTN1 pressed. Count = %lu\n", (unsigned long)button_press_count[0]);
     }
 }
 
@@ -137,7 +140,10 @@ static void _btn_2_cb(TimerHandle_t xTimer)
     if (gpio_get_level(GPIO_BUTTON_2))
     {
         button_press_count[1]++;
-        printf("BTN2 pressed. Count = %lu\n", (unsigned long)button_press_count[1]);
+        xEventGroupSetBits(
+            xGuiButtonEventGroup, 
+            GPIO_BUTTON_2_PRESS);
+        //printf("BTN2 pressed. Count = %lu\n", (unsigned long)button_press_count[1]);
     }
 }
 
@@ -147,7 +153,10 @@ static void _btn_3_cb(TimerHandle_t xTimer)
     if (gpio_get_level(GPIO_BUTTON_3))
     {
         button_press_count[2]++;
-        printf("BTN3 pressed. Count = %lu\n", (unsigned long)button_press_count[2]);
+        xEventGroupSetBits(
+            xGuiButtonEventGroup, 
+            GPIO_BUTTON_3_PRESS);
+        //printf("BTN3 pressed. Count = %lu\n", (unsigned long)button_press_count[2]);
     }
 }
 
@@ -156,7 +165,10 @@ static void _btn_4_cb(TimerHandle_t xTimer)
     if (gpio_get_level(GPIO_BUTTON_4))
     {
         button_press_count[3]++;
-        printf("BTN4 pressed. Count = %lu\n", (unsigned long)button_press_count[3]);
+        xEventGroupSetBits(
+            xGuiButtonEventGroup, 
+            GPIO_BUTTON_4_PRESS);
+        //printf("BTN4 pressed. Count = %lu\n", (unsigned long)button_press_count[3]);
     }
 }
 //---------------------------- INTERRUPT HANDLERS ------------------------------
