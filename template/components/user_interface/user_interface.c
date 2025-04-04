@@ -37,6 +37,8 @@ static TaskHandle_t p_user_interface_task = NULL;
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
+    led_init(GPIO_LED_BLUE);
+
     // izrada taska koji provjerava red poruka
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
     {
@@ -49,6 +51,7 @@ void user_interface_init(void)
 static void _user_interface_task(void *p_parameter)
 {
     EventBits_t uxBits;
+    
 
     for (;;)
     {

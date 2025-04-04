@@ -18,6 +18,7 @@
 //#include "gpio_button.h"
 #include "gui.h"
 #include "user_interface.h"
+#include "comms.h"
 
 //----------------------------------- PINS ------------------------------------
 #define GPIO_LED_RED (26U)
@@ -88,6 +89,7 @@ void app_main(void)
 
         printf("Button 1 pressed: %lu times.\n", button1_press_count);
     }*/
+    comms_init();
     user_interface_init();
     gui_init(); // inicijalizacija grafičkog sučelja
 
