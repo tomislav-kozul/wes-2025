@@ -29,7 +29,7 @@ void comms_init(void) {
         return;
     }
 
-    xGuiUpdateQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(gui_app_event_t));
+    xGuiUpdateQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(LabelData));
     if(xGuiUpdateQueue == NULL)
     {
         printf("The xGuiUpdateQueue queue was not initialized successfully\n");

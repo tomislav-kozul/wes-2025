@@ -6,6 +6,7 @@
 
 //--------------------------------- INCLUDES ----------------------------------
 #include "comms.h"
+#include "ui_helpers.h"
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
@@ -34,7 +35,17 @@ void gui_updater_init(void)
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _gui_updater_task(void *p_parameter) {
-    
+    LabelData receivedData;
+
+    for (;;)
+    {
+        // Wait for data from the queue
+        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
+            // Print the label and data (assuming lv_label_set_text_fmt function)
+            lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
+            
+        }
+    }
 }
 //---------------------------- INTERRUPT HANDLERS -----------------------------
 

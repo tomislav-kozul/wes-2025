@@ -12,6 +12,7 @@
 #include "user_interface.h"
 #include "gpio_led.h"
 #include "gui.h"
+#include "ui_helpers.h"
 #include "gui_updater.h"
 #include "comms.h"
 #include "freertos/FreeRTOS.h"
@@ -55,6 +56,7 @@ void user_interface_init(void)
 static void _user_interface_task(void *p_parameter)
 {
     EventBits_t uxBits;
+    int labelValue = 0;
 
     for (;;)
     {
@@ -67,7 +69,9 @@ static void _user_interface_task(void *p_parameter)
             switch (uxBits)
             {
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
-                led_on(GPIO_LED_BLUE);
+                labelValue++;
+                LabelData labelData = {ui_ButtonPressCounter, labelValue};
+                xQueueSend(xGuiUpdateQueue, &labelData, portMAX_DELAY);
                 printf("BLUE led on\n");
                 break;
             default:

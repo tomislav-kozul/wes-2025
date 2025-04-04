@@ -15,6 +15,7 @@ extern "C" {
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/event_groups.h"
+#include "ui_helpers.h"
 
 //---------------------------------- MACROS -----------------------------------
 #define GUI_APP_EVENT_BUTTON_JEBENI_PRESSED (1 << 0)
@@ -26,12 +27,11 @@ extern "C" {
  * @brief Enums hold gui app events.
  *
  */
-typedef enum
+typedef struct
 {
-    GUI_APP_UPDATE_COUNTER,
-
-    GUI_APP_EVENT_COUNT
-} gui_app_event_t;
+    lv_obj_t *label; // Label name
+    int data;              // Integer data to be passed
+} LabelData;
 
 //------------------------------- GLOBAL DATA ---------------------------------
 extern EventGroupHandle_t xGuiButtonEventGroup;
