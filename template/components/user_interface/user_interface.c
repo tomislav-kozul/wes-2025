@@ -42,6 +42,9 @@ void user_interface_init(void)
     led_init(GPIO_LED_BLUE);
     led_init(GPIO_LED_GREEN);
     button1_init();
+    button2_init();
+    button3_init();
+    button4_init();
 
     // izrada taska koji provjerava red poruka
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))

@@ -10,11 +10,13 @@
 #ifndef GPIO_BUTTON_H_
 #define GPIO_BUTTON_H_
 
-//--------------------------------- INCLUDES ----------------------------------
 #include "esp_err.h"
 #include <stdint.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/timers.h"
 
- //---------------------------------- MACROS -----------------------------------
+// Button GPIO definitions
 #define GPIO_BUTTON_1 (36U)
 #define GPIO_BUTTON_2 (32U)
 #define GPIO_BUTTON_3 (33U)
@@ -23,12 +25,10 @@
 
 #define DELAY_TIME_MS_DEBOUNCE (50U)
 
-//------------------------- STATIC DATA & CONSTANTS ---------------------------
-
-//------------------------------- GLOBAL DATA ---------------------------------
+// Extern volatile variables for button press counts.
+// Use 'volatile' because they are modified within an ISR.
 extern volatile uint32_t button1_press_count;
 
- //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
 esp_err_t button1_init(void);
 esp_err_t button2_init(void);
 esp_err_t button3_init(void);
