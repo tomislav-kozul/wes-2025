@@ -12,16 +12,6 @@
 
 #include "esp_err.h"
 #include <stdint.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "freertos/timers.h"
-
-// Button GPIO definitions
-#define GPIO_BUTTON_1 (36U)
-#define GPIO_BUTTON_2 (32U)
-#define GPIO_BUTTON_3 (33U)
-#define GPIO_BUTTON_4 (25U)
-#define GPIO_BIT_MASK(X) ((1ULL << (X)))
 
 #define DELAY_TIME_MS_DEBOUNCE (50U)
 

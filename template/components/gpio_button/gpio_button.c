@@ -16,6 +16,7 @@
 #include "freertos/timers.h"
 
 #include "comms.h"
+#include "pins.h"
 
 //---------------------------------- MACROS -----------------------------------
 

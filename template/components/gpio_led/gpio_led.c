@@ -11,6 +11,8 @@
 #include "gpio_led.h"
 #include "driver/gpio.h"
 
+#include "pins.h"
+
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
 static uint8_t led_state_red;
 static uint8_t led_state_blue;

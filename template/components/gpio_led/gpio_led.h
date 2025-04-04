@@ -14,13 +14,6 @@
  #include <stdint.h> // for uint8_t
  
  //---------------------------------- MACROS -----------------------------------
- #define GPIO_BIT_MASK(X) ((1ULL << (X)))
- // TODO: Move GPIO defines to make this module transferable 
- #define GPIO_LED_RED   (26U)
- #define GPIO_LED_GREEN (27U)
- #define GPIO_LED_BLUE  (14U)
-
-
 
  //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
  /**
