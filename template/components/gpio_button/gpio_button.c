@@ -14,6 +14,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "comms.h"
+
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
@@ -109,6 +111,9 @@ esp_err_t button4_init(void)
 static void IRAM_ATTR _btn_1_isr(void *p_arg)
 {
     (void)p_arg; // Suppress unused parameter warning
+    xEventGroupSetBits(
+		xGuiButtonEventGroup,				  /* The event group being updated. */
+		GPIO_BUTTON_1_PRESS); /* The bits being set. */
     button1_press_count++;  // Increment the button 1 counter
 }
 

@@ -44,6 +44,16 @@ void led_off(uint8_t pin)
     gpio_set_level(pin, 0U);
 }
 
+void led_toggle(uint8_t pin)
+{
+    static uint8_t led_state = 0;
+    
+    // Toggle the state
+    led_state = !led_state;
+    
+    // Set the pin to the new state
+    gpio_set_level(pin, led_state);
+}
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 
 //---------------------------- INTERRUPT HANDLERS ------------------------------

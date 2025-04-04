@@ -17,6 +17,7 @@
  #define GPIO_BIT_MASK(X) ((1ULL << (X)))
  // TODO: Move GPIO defines to make this module transferable 
  #define GPIO_LED_BLUE (14U)
+ #define GPIO_LED_GREEN (27U)
 
  //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
  /**
@@ -39,5 +40,12 @@
   * @param [in] pin The GPIO pin number (that controls LED) to be turned off.
   */
  void led_off(uint8_t pin);
+
+  /**
+  * @brief This function toggles the LED.
+  *
+  * @param [in] pin The GPIO pin number (that controls LED) to be toggled.
+  */
+ void led_toggle(uint8_t pin);
  
  #endif /* LED_CONTROL_H_ */

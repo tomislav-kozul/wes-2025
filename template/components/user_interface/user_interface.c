@@ -39,6 +39,7 @@ static TaskHandle_t p_user_interface_task = NULL;
 void user_interface_init(void)
 {
     led_init(GPIO_LED_BLUE);
+    led_init(GPIO_LED_GREEN);
     button1_init();
 
     // izrada taska koji provjerava red poruka
@@ -57,7 +58,9 @@ static void _user_interface_task(void *p_parameter)
     for (;;)
     {
         // Blockingly wait on an event.
-        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, GUI_APP_EVENT_BUTTON_JEBENI_PRESSED, pdTRUE, pdFALSE, portMAX_DELAY)))
+        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
+            GUI_APP_EVENT_BUTTON_JEBENI_PRESSED | GPIO_BUTTON_1_PRESS, 
+            pdTRUE, pdFALSE, portMAX_DELAY)))
         {
             printf("GUI event received %ld\n", uxBits);
 
@@ -65,7 +68,10 @@ static void _user_interface_task(void *p_parameter)
             switch (uxBits)
             {
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
-                led_on(GPIO_LED_BLUE);
+                led_toggle(GPIO_LED_GREEN);
+                break;
+            case GPIO_BUTTON_1_PRESS:
+                led_toggle(GPIO_LED_BLUE);
                 break;
             default:
                 printf("Uknown GUI event\n");

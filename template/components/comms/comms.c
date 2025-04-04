@@ -18,6 +18,7 @@
 
 //------------------------------- GLOBAL DATA ---------------------------------
 EventGroupHandle_t xGuiButtonEventGroup;
+EventGroupHandle_t xGpioButtonEventGroup;
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void comms_init(void) {
@@ -25,6 +26,13 @@ void comms_init(void) {
     if( xGuiButtonEventGroup == NULL )
     {
         printf("The xGuiButtonEventGroup was not created successfully\n");
+        return;
+    }
+
+    xGpioButtonEventGroup = xEventGroupCreate();
+    if( xGpioButtonEventGroup == NULL )
+    {
+        printf("The xGpioButtonEventGroup was not created successfully\n");
         return;
     }
 }
