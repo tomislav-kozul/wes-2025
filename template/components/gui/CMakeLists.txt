@@ -5,6 +5,7 @@ file(GLOB_RECURSE SQUARELINE_SRCS
 
 set(COMPONENT_SRCS 
     "gui.c"
+    "gui_updater.c"
     ${SQUARELINE_SRCS}
 )
 

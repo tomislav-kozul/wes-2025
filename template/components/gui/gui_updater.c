@@ -1,41 +1,40 @@
 /**
- * @file comms.c
- *
- * @brief This file is responsible for communication between tasks.
- */
+* @file gui_updater.c
+
+* @brief This file is responsible for updating the elements on screen.
+*/
 
 //--------------------------------- INCLUDES ----------------------------------
 #include "comms.h"
-#include <stdio.h>
-
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
 
 //---------------------- PRIVATE FUNCTION PROTOTYPES --------------------------
+/**
+ * @brief Starts GUI updater task.
+ *
+ * @param [in] p_parameter Parameter that is passed to the task.
+ */
+static void _gui_updater_task(void *p_parameter);
 
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
+static TaskHandle_t p_gui_updater_task = NULL;
 
 //------------------------------- GLOBAL DATA ---------------------------------
-EventGroupHandle_t xGuiButtonEventGroup;
-QueueHandle_t xGuiUpdateQueue;
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
-void comms_init(void) {
-    xGuiButtonEventGroup = xEventGroupCreate();
-    if( xGuiButtonEventGroup == NULL )
-    {
-        printf("The xGuiButtonEventGroup was not created successfully\n");
-        return;
-    }
-
-    xGuiUpdateQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(gui_app_event_t));
-    if(xGuiUpdateQueue == NULL)
-    {
-        printf("The xGuiUpdateQueue queue was not initialized successfully\n");
-        return;
-    }
+/**
+ * @brief Initializes the GUI updater.
+ */
+void gui_updater_init(void)
+{
+    xTaskCreate(_gui_updater_task, "gui_updater", 4096 * 2, NULL, 5, &p_gui_updater_task);
 }
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
+static void _gui_updater_task(void *p_parameter) {
+    
+}
+//---------------------------- INTERRUPT HANDLERS -----------------------------
 

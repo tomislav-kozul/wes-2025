@@ -11,6 +11,8 @@
 //--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
 #include "gpio_led.h"
+#include "gui.h"
+#include "gui_updater.h"
 #include "comms.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -38,6 +40,8 @@ static TaskHandle_t p_user_interface_task = NULL;
 void user_interface_init(void)
 {
     led_init(GPIO_LED_BLUE);
+    gui_init();
+    gui_updater_init();
 
     // izrada taska koji provjerava red poruka
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
@@ -51,7 +55,6 @@ void user_interface_init(void)
 static void _user_interface_task(void *p_parameter)
 {
     EventBits_t uxBits;
-    
 
     for (;;)
     {
@@ -65,6 +68,7 @@ static void _user_interface_task(void *p_parameter)
             {
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
                 led_on(GPIO_LED_BLUE);
+                printf("BLUE led on\n");
                 break;
             default:
                 printf("Uknown GUI event\n");

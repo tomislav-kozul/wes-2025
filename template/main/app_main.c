@@ -78,19 +78,6 @@
 
 void app_main(void)
 {
-
-    /*for(;;)
-    {
-        led_on(GPIO_LED_RED);
-        vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
-
-        led_off(GPIO_LED_RED);
-        vTaskDelay(DELAY_TIME_MS / portTICK_PERIOD_MS);
-
-        printf("Button 1 pressed: %lu times.\n", button1_press_count);
-    }*/
     comms_init();
     user_interface_init();
-    gui_init(); // inicijalizacija grafičkog sučelja
-
 }
