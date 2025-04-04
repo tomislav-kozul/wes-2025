@@ -15,12 +15,17 @@ extern "C" {
 #endif
 
 //--------------------------------- INCLUDES ----------------------------------
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
 
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
 
 //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
+
+//------------------------- STATIC DATA & CONSTANTS ---------------------------
+extern SemaphoreHandle_t p_gui_semaphore;
 
 /**
  * @brief Initializes LVGL, TFT drivers and input drivers and starts task needed for GUI operation.

@@ -53,9 +53,9 @@ static void _lv_tick_timer(void *p_arg);
 static void _gui_task(void *p_parameter);
 
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
-static SemaphoreHandle_t p_gui_semaphore;
 
 //------------------------------- GLOBAL DATA ---------------------------------
+SemaphoreHandle_t p_gui_semaphore;
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void gui_init()

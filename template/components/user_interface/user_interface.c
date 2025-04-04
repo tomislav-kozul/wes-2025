@@ -83,7 +83,7 @@ static void _user_interface_task(void *p_parameter)
             switch (uxBits)
             {
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
-                led_toggle(GPIO_LED_GREEN);
+                led_toggle(GPIO_LED_BLUE);
                 labelValue++;
                 LabelData labelData = {ui_ButtonPressCounter, labelValue};
                 xQueueSend(xGuiUpdateQueue, &labelData, portMAX_DELAY);

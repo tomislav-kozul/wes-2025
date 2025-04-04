@@ -6,7 +6,7 @@
 
 //--------------------------------- INCLUDES ----------------------------------
 #include "comms.h"
-#include "ui_helpers.h"
+#include "gui.h"
 //---------------------------------- MACROS -----------------------------------
 
 //-------------------------------- DATA TYPES ---------------------------------
@@ -41,9 +41,13 @@ static void _gui_updater_task(void *p_parameter) {
     {
         // Wait for data from the queue
         if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
-            // Print the label and data (assuming lv_label_set_text_fmt function)
-            lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
-            
+            /* Try to take the semaphore, call lvgl related function on success */
+            if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
+            {
+                lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
+                xSemaphoreGive(p_gui_semaphore);
+            }
+                
         }
     }
 }
