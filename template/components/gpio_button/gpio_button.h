@@ -12,6 +12,9 @@
 
 #include "esp_err.h"
 #include <stdint.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/timers.h"
 
 // Button GPIO definitions
 #define GPIO_BUTTON_1 (36U)
@@ -24,11 +27,11 @@
 
 // Extern volatile variables for button press counts.
 // Use 'volatile' because they are modified within an ISR.
-extern volatile uint32_t button1_press_count;
-
-// Initialize a button by specifying its GPIO pin and ISR callback.
-esp_err_t button_init(uint8_t pin, void (*p_isr)(void*));
+extern volatile uint32_t button_press_count[4];
 
 esp_err_t button1_init(void);
+esp_err_t button2_init(void);
+esp_err_t button3_init(void);
+esp_err_t button4_init(void);
 
 #endif // BUTTON_H

@@ -49,8 +49,8 @@ void ui_Home_Scr_screen_init(void)
     ui_Label3 = lv_label_create(ui_Home_Scr);
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, -31);
-    lv_obj_set_y(ui_Label3, 26);
+    lv_obj_set_x(ui_Label3, -33);
+    lv_obj_set_y(ui_Label3, 36);
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "Counter:");
     lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -59,8 +59,8 @@ void ui_Home_Scr_screen_init(void)
     ui_ButtonPressCounter = lv_label_create(ui_Home_Scr);
     lv_obj_set_width(ui_ButtonPressCounter, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ButtonPressCounter, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ButtonPressCounter, 23);
-    lv_obj_set_y(ui_ButtonPressCounter, 27);
+    lv_obj_set_x(ui_ButtonPressCounter, 18);
+    lv_obj_set_y(ui_ButtonPressCounter, 37);
     lv_obj_set_align(ui_ButtonPressCounter, LV_ALIGN_CENTER);
     lv_label_set_text(ui_ButtonPressCounter, "0");
     lv_obj_set_style_text_color(ui_ButtonPressCounter, lv_color_hex(0xFF00F2), LV_PART_MAIN | LV_STATE_DEFAULT);

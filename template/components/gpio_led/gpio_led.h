@@ -10,12 +10,17 @@
  #ifndef GPIO_LED_H_
  #define GPIO_LED_H_
  
+ //--------------------------------- INCLUDES ----------------------------------
  #include <stdint.h> // for uint8_t
  
  //---------------------------------- MACROS -----------------------------------
  #define GPIO_BIT_MASK(X) ((1ULL << (X)))
  // TODO: Move GPIO defines to make this module transferable 
- #define GPIO_LED_BLUE (14U)
+ #define GPIO_LED_RED   (26U)
+ #define GPIO_LED_GREEN (27U)
+ #define GPIO_LED_BLUE  (14U)
+
+
 
  //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
  /**
@@ -38,5 +43,14 @@
   * @param [in] pin The GPIO pin number (that controls LED) to be turned off.
   */
  void led_off(uint8_t pin);
+
+  /**
+  * @brief This function toggles the LED.
+  *
+  * @param [in] pin The GPIO pin number (that controls LED) to be toggled.
+  */
+ void led_toggle(uint8_t pin);
+
+ void led_toggle_state_init(void);
  
  #endif /* LED_CONTROL_H_ */

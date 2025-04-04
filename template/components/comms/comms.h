@@ -20,7 +20,12 @@ extern "C" {
 //---------------------------------- MACROS -----------------------------------
 #define GUI_APP_EVENT_BUTTON_JEBENI_PRESSED (1 << 0)
 
-#define USER_INTERFACE_QUEUE_SIZE (20U)     // veličina reda poruka
+#define GPIO_BUTTON_1_PRESS     (1 << 1)
+#define GPIO_BUTTON_2_PRESS     (1 << 2)
+#define GPIO_BUTTON_3_PRESS     (1 << 3)
+#define GPIO_BUTTON_4_PRESS     (1 << 4)
+
+#define USER_INTERFACE_QUEUE_SIZE (20U)
 
 //-------------------------------- DATA TYPES ---------------------------------
 /**
@@ -35,6 +40,7 @@ typedef struct
 
 //------------------------------- GLOBAL DATA ---------------------------------
 extern EventGroupHandle_t xGuiButtonEventGroup;
+extern EventGroupHandle_t xGpioButtonEventGroup;
 extern QueueHandle_t xGuiUpdateQueue;
 
 //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------

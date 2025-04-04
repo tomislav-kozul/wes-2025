@@ -11,6 +11,7 @@
 //--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
 #include "gpio_led.h"
+#include "gpio_button.h"
 #include "gui.h"
 #include "ui_helpers.h"
 #include "gui_updater.h"
@@ -40,7 +41,13 @@ static TaskHandle_t p_user_interface_task = NULL;
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
+    led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
+    led_init(GPIO_LED_GREEN);
+    button1_init();
+    button2_init();
+    button3_init();
+    button4_init();
     gui_init();
     gui_updater_init();
 
@@ -61,7 +68,13 @@ static void _user_interface_task(void *p_parameter)
     for (;;)
     {
         // Blockingly wait on an event.
-        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, GUI_APP_EVENT_BUTTON_JEBENI_PRESSED, pdTRUE, pdFALSE, portMAX_DELAY)))
+        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
+                GUI_APP_EVENT_BUTTON_JEBENI_PRESSED 
+                | GPIO_BUTTON_1_PRESS
+                | GPIO_BUTTON_2_PRESS
+                | GPIO_BUTTON_3_PRESS
+                | GPIO_BUTTON_4_PRESS, 
+            pdTRUE, pdFALSE, portMAX_DELAY)))
         {
             printf("GUI event received %ld\n", uxBits);
 
@@ -69,10 +82,22 @@ static void _user_interface_task(void *p_parameter)
             switch (uxBits)
             {
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
+                led_toggle(GPIO_LED_GREEN);
                 labelValue++;
                 LabelData labelData = {ui_ButtonPressCounter, labelValue};
                 xQueueSend(xGuiUpdateQueue, &labelData, portMAX_DELAY);
-                printf("BLUE led on\n");
+                break;
+            case GPIO_BUTTON_1_PRESS:
+                printf("1 - %lu\n", button_press_count[0]);
+                break;
+            case GPIO_BUTTON_2_PRESS:
+                printf("2 - %lu\n", button_press_count[1]);
+                break;
+            case GPIO_BUTTON_3_PRESS:
+                printf("3 - %lu\n", button_press_count[2]);
+                break;
+            case GPIO_BUTTON_4_PRESS:
+                printf("4 - %lu\n", button_press_count[3]);
                 break;
             default:
                 printf("Uknown GUI event\n");

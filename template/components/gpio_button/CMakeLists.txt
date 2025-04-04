@@ -1,5 +1,5 @@
 set(COMPONENT_SRCS "gpio_button.c")
 set(COMPONENT_ADD_INCLUDEDIRS ".")
-set(COMPONENT_REQUIRES driver)
+set(COMPONENT_REQUIRES driver comms)
 
 register_component()

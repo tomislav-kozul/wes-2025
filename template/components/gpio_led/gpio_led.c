@@ -12,10 +12,19 @@
 #include "driver/gpio.h"
 
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
+static uint8_t led_state_red;
+static uint8_t led_state_blue;
+static uint8_t led_state_green;
 
 //------------------------------- GLOBAL DATA ---------------------------------
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
+void led_toggle_state_init(void) {
+    led_state_red = 0;
+    led_state_blue = 0;
+    led_state_green = 0;
+}
+
 void led_init(uint8_t pin)
 {
     // zero-initialize the config structure.
@@ -39,9 +48,29 @@ void led_on(uint8_t pin)
     gpio_set_level(pin, 1U);
 }
 
-void led_off(uint8_t pin)
+void led_toggle(uint8_t pin)
 {
-    gpio_set_level(pin, 0U);
+    uint32_t level = 0;
+    switch (pin)
+    {
+        case GPIO_LED_BLUE:
+            led_state_blue = (led_state_blue + 1) % 2;
+            level = led_state_blue;
+            break;
+        case GPIO_LED_RED:
+            led_state_red = (led_state_red + 1) % 2;
+            level = led_state_red;
+            break;
+        case GPIO_LED_GREEN:
+            led_state_green = (led_state_green + 1) % 2;
+            level  = led_state_green;
+            break;
+        default:
+            printf("Invalid LED pin!\n");
+            break;
+    }
+
+    gpio_set_level(pin, level);
 }
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
