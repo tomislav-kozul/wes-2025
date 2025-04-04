@@ -48,6 +48,8 @@ static void _btn_3_isr(void *p_arg);
 static void _btn_4_isr(void *p_arg);
 
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
+static void _button_timer_cb(TimerHandle_t xTimer);
+static TimerHandle_t buttonTimer = NULL;
 
 //------------------------------- GLOBAL DATA ---------------------------------
 volatile uint32_t button1_press_count = 0;
@@ -86,7 +88,27 @@ esp_err_t button_init(uint8_t pin, void (*p_isr)(void*))
 // Helper function to initialize button 1 with its ISR.
 esp_err_t button1_init(void)
 {
-    return button_init(GPIO_BUTTON_1, _btn_1_isr);
+    esp_err_t err = button_init(GPIO_BUTTON_1, _btn_1_isr);
+
+    if (err == ESP_OK)
+    {
+        // Create a one-shot timer for debouncing
+        // e.g. 50 ms for debounce
+        buttonTimer = xTimerCreate(
+            "buttonTimer",
+            pdMS_TO_TICKS(DELAY_TIME_MS_DEBOUNCE),
+            pdFALSE,       // one-shot timer
+            NULL,
+            _button_timer_cb
+        );
+
+        if (buttonTimer == NULL)
+        {
+            //ESP_LOGE("BTN", "Failed to create debounce timer");
+            return ESP_FAIL;
+        }
+    }
+    return err;
 }
 
 esp_err_t button2_init(void)
@@ -105,16 +127,38 @@ esp_err_t button4_init(void)
 }
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
+static void _button_timer_cb(TimerHandle_t xTimer)
+{
+    // Read the actual state of the pin
+    int level = gpio_get_level(GPIO_BUTTON_1);
+
+    // If the pin is still high (or low, depending on your wiring),
+    // we consider that a stable press
+    if (level == 1) // e.g. if pressed means logic 1
+    {
+        button1_press_count++;
+        xEventGroupSetBits(
+            xGuiButtonEventGroup,   /* The event group being updated. */
+            GPIO_BUTTON_1_PRESS);   /* The bits being set. */
+        printf("Count=%lu\n", button1_press_count);
+    }
+    else
+    {
+        // Not a valid press
+    }
+}
 
 //---------------------------- INTERRUPT HANDLERS ------------------------------
 // Interrupt Service Routine for button 1.
 static void IRAM_ATTR _btn_1_isr(void *p_arg)
 {
     (void)p_arg; // Suppress unused parameter warning
-    xEventGroupSetBits(
-		xGuiButtonEventGroup,				  /* The event group being updated. */
-		GPIO_BUTTON_1_PRESS); /* The bits being set. */
-    button1_press_count++;  // Increment the button 1 counter
+    //button1_press_count++;  // Increment the button 1 counter
+    if (buttonTimer != NULL)
+    {
+        // Reset will (re)start the timer, making it fire 50ms from now
+        xTimerResetFromISR(buttonTimer, pdFALSE);
+    }
 }
 
 // Interrupt Service Routine for button 2.

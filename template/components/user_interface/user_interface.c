@@ -38,6 +38,7 @@ static TaskHandle_t p_user_interface_task = NULL;
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
+    led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
     led_init(GPIO_LED_GREEN);
     button1_init();
