@@ -1,20 +1,35 @@
+/**
+ * @file gpio_button.c
+ *
+ * @brief Source file for BUTTON control library.
+ *
+ * COPYRIGHT NOTICE: (c) 2024 Byte Lab Grupa d.o.o.
+ * All rights reserved.
+ */
+
+ //--------------------------------- INCLUDES ----------------------------------
 #include "gpio_button.h"
 
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-// Define the global button press counters.
+//---------------------------------- MACROS -----------------------------------
+
+//-------------------------------- DATA TYPES ---------------------------------
+/**
+ * @brief Callback function for button 1 press.
+ *
+ * @param [in] p_arg Pointer to the pin that caused the callback.
+ */
+static void _btn_1_isr(void *p_arg);
+
+//------------------------- STATIC DATA & CONSTANTS ---------------------------
+
+//------------------------------- GLOBAL DATA ---------------------------------
 volatile uint32_t button1_press_count = 0;
 
-// Interrupt Service Routine for button 1.
-static void IRAM_ATTR _btn_1_isr(void *p_arg)
-{
-    (void)p_arg; // Suppress unused parameter warning
-    button1_press_count++;  // Increment the button 1 counter
-}
-
-// Public function to initialize a button with a given ISR.
+//------------------------------ PUBLIC FUNCTIONS -----------------------------
 esp_err_t button_init(uint8_t pin, void (*p_isr)(void*))
 {
     gpio_config_t io_conf = {
@@ -49,4 +64,14 @@ esp_err_t button_init(uint8_t pin, void (*p_isr)(void*))
 esp_err_t button1_init(void)
 {
     return button_init(GPIO_BUTTON_1, _btn_1_isr);
+}
+
+//---------------------------- PRIVATE FUNCTIONS ------------------------------
+
+//---------------------------- INTERRUPT HANDLERS ------------------------------
+// Interrupt Service Routine for button 1.
+static void IRAM_ATTR _btn_1_isr(void *p_arg)
+{
+    (void)p_arg; // Suppress unused parameter warning
+    button1_press_count++;  // Increment the button 1 counter
 }

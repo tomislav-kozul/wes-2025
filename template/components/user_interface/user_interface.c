@@ -52,7 +52,6 @@ static void _user_interface_task(void *p_parameter)
 {
     EventBits_t uxBits;
     
-
     for (;;)
     {
         // Blockingly wait on an event.
