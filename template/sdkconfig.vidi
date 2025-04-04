@@ -1494,6 +1494,13 @@ CONFIG_WPA_MBEDTLS_TLS_CLIENT=y
 # end of Supplicant
 
 #
+# Board Configuration
+#
+# CONFIG_TARGET_BYTELAB is not set
+CONFIG_TARGET_VIDI=y
+# end of Board Configuration
+
+#
 # UI application
 #
 # CONFIG_UI_APP_BL_GUI is not set

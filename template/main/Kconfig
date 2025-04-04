@@ -1,0 +1,16 @@
+menu "Board Configuration"
+
+    choice
+        prompt "Select target board"
+        default TARGET_BYTELAB
+        help
+            Which board configuration to use
+
+        config TARGET_BYTELAB
+            bool "Target Bytelab"
+
+        config TARGET_VIDI
+            bool "Target Vidi"
+    endchoice
+
+endmenu
