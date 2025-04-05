@@ -1,0 +1,10 @@
+SET(SOURCES screens/ui_Home_Scr.c
+    screens/ui_FrontSensorScreen.c
+    screens/ui_RadioScreen.c
+    screens/ui_HVACScreen.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    ui_events.c)
+
+add_library(ui ${SOURCES})
