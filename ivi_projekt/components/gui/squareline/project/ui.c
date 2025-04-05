@@ -50,10 +50,30 @@ lv_obj_t * ui_RadioScreen;
 // SCREEN: ui_HVACScreen
 void ui_HVACScreen_screen_init(void);
 lv_obj_t * ui_HVACScreen;
+lv_obj_t * ui_Image3;
+lv_obj_t * ui_DateTimeLabel;
+void ui_event_HomeButton(lv_event_t * e);
+lv_obj_t * ui_HomeButton;
+void ui_event_RadioButton(lv_event_t * e);
+lv_obj_t * ui_RadioButton;
+void ui_event_HVACButton(lv_event_t * e);
+lv_obj_t * ui_HVACButton;
+lv_obj_t * ui_SettingsButton;
+void ui_event_SeatControl1(lv_event_t * e);
+lv_obj_t * ui_SeatControl1;
+void ui_event_SeatControl2(lv_event_t * e);
+lv_obj_t * ui_SeatControl2;
+
+
+// SCREEN: ui_SeatHeatingControl
+void ui_SeatHeatingControl_screen_init(void);
+lv_obj_t * ui_SeatHeatingControl;
+void ui_event_Button2(lv_event_t * e);
+lv_obj_t * ui_Button2;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_defrost_x[2] = {&ui_img_defrost_16x16_png, &ui_img_defrost_32x32_png};
-const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
 const lv_img_dsc_t * ui_imgset_hvac_background_320x[1] = {&ui_img_hvac_background_320x240_png};
+const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -366,6 +386,54 @@ void ui_event_frontSensorButton(lv_event_t * e)
         _ui_screen_change(&ui_FrontSensorScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_FrontSensorScreen_screen_init);
     }
 }
+void ui_event_HomeButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Home_Scr, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Home_Scr_screen_init);
+    }
+}
+void ui_event_RadioButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_RadioScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_RadioScreen_screen_init);
+    }
+}
+void ui_event_HVACButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_HVACScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_HVACScreen_screen_init);
+    }
+}
+void ui_event_SeatControl1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_SeatHeatingControl, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_SeatHeatingControl_screen_init);
+    }
+}
+void ui_event_SeatControl2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_SeatHeatingControl, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_SeatHeatingControl_screen_init);
+    }
+}
+void ui_event_Button2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_state_modify(ui_Button2, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+    }
+}
 
 ///////////////////// SCREENS ////////////////////
 
@@ -379,6 +447,7 @@ void ui_init(void)
     ui_FrontSensorScreen_screen_init();
     ui_RadioScreen_screen_init();
     ui_HVACScreen_screen_init();
+    ui_SeatHeatingControl_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Home_Scr);
 }

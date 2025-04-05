@@ -89,6 +89,10 @@ void ui_Home_Scr_screen_init(void)
     lv_obj_set_align(ui_hvacButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_hvacButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_hvacButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_hvacButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_PRESSED);
+    lv_obj_set_style_bg_opa(ui_hvacButton, 255, LV_PART_MAIN | LV_STATE_PRESSED);
+    lv_obj_set_style_border_color(ui_hvacButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_PRESSED);
+    lv_obj_set_style_border_opa(ui_hvacButton, 255, LV_PART_MAIN | LV_STATE_PRESSED);
 
     ui_Label5 = lv_label_create(ui_hvacButton);
     lv_obj_set_width(ui_Label5, LV_SIZE_CONTENT);   /// 1

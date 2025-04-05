@@ -50,12 +50,30 @@ extern lv_obj_t * ui_RadioScreen;
 // SCREEN: ui_HVACScreen
 void ui_HVACScreen_screen_init(void);
 extern lv_obj_t * ui_HVACScreen;
+extern lv_obj_t * ui_Image3;
+extern lv_obj_t * ui_DateTimeLabel;
+void ui_event_HomeButton(lv_event_t * e);
+extern lv_obj_t * ui_HomeButton;
+void ui_event_RadioButton(lv_event_t * e);
+extern lv_obj_t * ui_RadioButton;
+void ui_event_HVACButton(lv_event_t * e);
+extern lv_obj_t * ui_HVACButton;
+extern lv_obj_t * ui_SettingsButton;
+void ui_event_SeatControl1(lv_event_t * e);
+extern lv_obj_t * ui_SeatControl1;
+void ui_event_SeatControl2(lv_event_t * e);
+extern lv_obj_t * ui_SeatControl2;
+// SCREEN: ui_SeatHeatingControl
+void ui_SeatHeatingControl_screen_init(void);
+extern lv_obj_t * ui_SeatHeatingControl;
+void ui_event_Button2(lv_event_t * e);
+extern lv_obj_t * ui_Button2;
 extern lv_obj_t * ui____initial_actions0;
 
 
-LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
-LV_IMG_DECLARE(ui_img_defrost_32x32_png);    // assets/defrost_32x32.png
 LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
+LV_IMG_DECLARE(ui_img_defrost_32x32_png);    // assets/defrost_32x32.png
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
 LV_IMG_DECLARE(ui_img_hvac_background_320x240_png);    // assets/hvac_background_320x240.png
 
 
