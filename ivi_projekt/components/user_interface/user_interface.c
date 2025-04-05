@@ -51,6 +51,8 @@ void user_interface_init(void)
     button4_init();
     gui_init();
     gui_updater_init();
+    
+
 
     // izrada taska koji provjerava red poruka
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
@@ -74,7 +76,8 @@ static void _user_interface_task(void *p_parameter)
                 | GPIO_BUTTON_1_PRESS
                 | GPIO_BUTTON_2_PRESS
                 | GPIO_BUTTON_3_PRESS
-                | GPIO_BUTTON_4_PRESS, 
+                | GPIO_BUTTON_4_PRESS
+                | WIFI_CONNECTED_BIT, 
             pdTRUE, pdFALSE, portMAX_DELAY)))
         {
             printf("GUI event received %ld\n", uxBits);
@@ -99,6 +102,9 @@ static void _user_interface_task(void *p_parameter)
                 break;
             case GPIO_BUTTON_4_PRESS:
                 printf("4 - %lu\n", button_press_count[3]);
+                break;
+            case WIFI_CONNECTED_BIT:
+                printf("WiFi connected!");
                 break;
             default:
                 printf("Uknown GUI event\n");

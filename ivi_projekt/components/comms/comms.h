@@ -25,6 +25,9 @@ extern "C" {
 #define GPIO_BUTTON_3_PRESS     (1 << 3)
 #define GPIO_BUTTON_4_PRESS     (1 << 4)
 
+#define WIFI_CONNECTED_BIT      (1 << 5)
+
+
 #define USER_INTERFACE_QUEUE_SIZE (20U)
 
 //-------------------------------- DATA TYPES ---------------------------------
