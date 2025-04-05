@@ -18,21 +18,35 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 lv_obj_t * ui_Home_Scr;
-void ui_event_Button1(lv_event_t * e);
-lv_obj_t * ui_Button1;
-void ui_event_Label1(lv_event_t * e);
-lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
 lv_obj_t * ui_Label2;
 lv_obj_t * ui_Label3;
 lv_obj_t * ui_ButtonPressCounter;
+void ui_event_radioButton(lv_event_t * e);
+lv_obj_t * ui_radioButton;
+lv_obj_t * ui_Label4;
+void ui_event_hvacButton(lv_event_t * e);
+lv_obj_t * ui_hvacButton;
+lv_obj_t * ui_Label5;
+void ui_event_frontSensorButton(lv_event_t * e);
+lv_obj_t * ui_frontSensorButton;
+lv_obj_t * ui_Label6;
 
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-lv_obj_t * ui_Screen1;
-lv_obj_t * ui_ButtonPressChart;
+// SCREEN: ui_FrontSensorScreen
+void ui_FrontSensorScreen_screen_init(void);
+lv_obj_t * ui_FrontSensorScreen;
+
+
+// SCREEN: ui_RadioScreen
+void ui_RadioScreen_screen_init(void);
+lv_obj_t * ui_RadioScreen;
+
+
+// SCREEN: ui_HVACScreen
+void ui_HVACScreen_screen_init(void);
+lv_obj_t * ui_HVACScreen;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -306,29 +320,36 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay)
 }
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_Button1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_RELEASED) {
-        _ui_screen_change(&ui_Screen1, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Screen1_screen_init);
-    }
-}
-void ui_event_Label1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_RELEASED) {
-        btn_clicked(e);
-        _ui_screen_change(&ui_Screen1, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Screen1_screen_init);
-    }
-}
 void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_PRESSED) {
         jebena_funkcija(e);
+    }
+}
+void ui_event_radioButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_RadioScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_RadioScreen_screen_init);
+    }
+}
+void ui_event_hvacButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_HVACScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_HVACScreen_screen_init);
+    }
+}
+void ui_event_frontSensorButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_FrontSensorScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_FrontSensorScreen_screen_init);
     }
 }
 
@@ -341,7 +362,9 @@ void ui_init(void)
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     ui_Home_Scr_screen_init();
-    ui_Screen1_screen_init();
+    ui_FrontSensorScreen_screen_init();
+    ui_RadioScreen_screen_init();
+    ui_HVACScreen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Home_Scr);
 }
