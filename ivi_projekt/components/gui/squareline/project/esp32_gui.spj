@@ -4867,7 +4867,7 @@
               {
                 "nid": -1525565075,
                 "strtype": "IMAGE/Asset",
-                "strval": "assets\\hvac_background_280x205.png",
+                "strval": "assets/hvac_background_280x205.png",
                 "InheritedType": 5
               },
               {
@@ -8532,7 +8532,7 @@
                       {
                         "nid": -1065083509,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets\\defrost_32x32.png",
+                        "strval": "assets/defrost_32x32.png",
                         "InheritedType": 5
                       },
                       {

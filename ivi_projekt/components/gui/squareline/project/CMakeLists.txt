@@ -2,7 +2,7 @@ SET(SOURCES screens/ui_Home_Scr.c
     screens/ui_FrontSensorScreen.c
     screens/ui_RadioScreen.c
     screens/ui_HVACScreen.c
-    screens/ui_SeatHeatingControl.c
+    screens/ui_ACControlScreen.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c

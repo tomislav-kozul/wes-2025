@@ -87,32 +87,44 @@ void ui_HVACScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_SettingsButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_SettingsButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SeatControl1 = lv_btn_create(ui_HVACScreen);
-    lv_obj_set_width(ui_SeatControl1, 20);
-    lv_obj_set_height(ui_SeatControl1, 20);
-    lv_obj_set_x(ui_SeatControl1, -39);
-    lv_obj_set_y(ui_SeatControl1, 41);
-    lv_obj_set_align(ui_SeatControl1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SeatControl1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SeatControl1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_SeatControl1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SeatControl1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SeatControlButton1 = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_SeatControlButton1, 20);
+    lv_obj_set_height(ui_SeatControlButton1, 20);
+    lv_obj_set_x(ui_SeatControlButton1, -39);
+    lv_obj_set_y(ui_SeatControlButton1, 41);
+    lv_obj_set_align(ui_SeatControlButton1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SeatControlButton1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_SeatControlButton1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SeatControlButton1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SeatControlButton1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SeatControl2 = lv_btn_create(ui_HVACScreen);
-    lv_obj_set_width(ui_SeatControl2, 20);
-    lv_obj_set_height(ui_SeatControl2, 18);
-    lv_obj_set_x(ui_SeatControl2, 87);
-    lv_obj_set_y(ui_SeatControl2, 45);
-    lv_obj_set_align(ui_SeatControl2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SeatControl2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SeatControl2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_SeatControl2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SeatControl2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SeatControlButton2 = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_SeatControlButton2, 20);
+    lv_obj_set_height(ui_SeatControlButton2, 18);
+    lv_obj_set_x(ui_SeatControlButton2, 87);
+    lv_obj_set_y(ui_SeatControlButton2, 45);
+    lv_obj_set_align(ui_SeatControlButton2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SeatControlButton2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_SeatControlButton2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SeatControlButton2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SeatControlButton2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ACControlButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_ACControlButton, 20);
+    lv_obj_set_height(ui_ACControlButton, 18);
+    lv_obj_set_x(ui_ACControlButton, 24);
+    lv_obj_set_y(ui_ACControlButton, -35);
+    lv_obj_set_align(ui_ACControlButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ACControlButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_ACControlButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_ACControlButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ACControlButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_HomeButton, ui_event_HomeButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_RadioButton, ui_event_RadioButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HVACButton, ui_event_HVACButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SeatControl1, ui_event_SeatControl1, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SeatControl2, ui_event_SeatControl2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SeatControlButton1, ui_event_SeatControlButton1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SeatControlButton2, ui_event_SeatControlButton2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ACControlButton, ui_event_ACControlButton, LV_EVENT_ALL, NULL);
 
 }

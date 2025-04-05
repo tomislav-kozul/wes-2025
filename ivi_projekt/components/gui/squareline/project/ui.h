@@ -59,13 +59,16 @@ extern lv_obj_t * ui_RadioButton;
 void ui_event_HVACButton(lv_event_t * e);
 extern lv_obj_t * ui_HVACButton;
 extern lv_obj_t * ui_SettingsButton;
-void ui_event_SeatControl1(lv_event_t * e);
-extern lv_obj_t * ui_SeatControl1;
-void ui_event_SeatControl2(lv_event_t * e);
-extern lv_obj_t * ui_SeatControl2;
-// SCREEN: ui_SeatHeatingControl
-void ui_SeatHeatingControl_screen_init(void);
-extern lv_obj_t * ui_SeatHeatingControl;
+void ui_event_SeatControlButton1(lv_event_t * e);
+extern lv_obj_t * ui_SeatControlButton1;
+void ui_event_SeatControlButton2(lv_event_t * e);
+extern lv_obj_t * ui_SeatControlButton2;
+void ui_event_ACControlButton(lv_event_t * e);
+extern lv_obj_t * ui_ACControlButton;
+// SCREEN: ui_ACControlScreen
+void ui_ACControlScreen_screen_init(void);
+extern lv_obj_t * ui_ACControlScreen;
+extern lv_obj_t * ui_Arc1;
 void ui_event_Button2(lv_event_t * e);
 extern lv_obj_t * ui_Button2;
 extern lv_obj_t * ui____initial_actions0;
