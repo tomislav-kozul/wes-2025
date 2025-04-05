@@ -4,3 +4,9 @@
 [submodule "template/components/lvgl_esp32_drivers"]
 	path = template/components/lvgl_esp32_drivers
 	url = https://github.com/lvgl/lvgl_esp32_drivers.git
+[submodule "ivi_projekt/components/lvgl"]
+	path = ivi_projekt/components/lvgl
+	url = https://github.com/lvgl/lvgl.git
+[submodule "ivi_projekt/components/lvgl_esp32_drivers"]
+	path = ivi_projekt/components/lvgl_esp32_drivers
+	url = https://github.com/lvgl/lvgl_esp32_drivers.git
