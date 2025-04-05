@@ -26,6 +26,11 @@
  #define GPIO_BUTTON_4_PRESS     (1 << 4)
  
  #define WIFI_CONNECTED_BIT      (1 << 5)
+
+ #define FRONT_SENSOR_ZONE_RED       (1 << 10)
+ #define FRONT_SENSOR_ZONE_YELLOW    (1 << 11)
+ #define FRONT_SENSOR_ZONE_GREEN     (1 << 12)
+ #define FRONT_SENSOR_ZONE_NONE      (1 << 13)
  
  
  #define USER_INTERFACE_QUEUE_SIZE (20U)
@@ -49,6 +54,22 @@
         } update_label;
      };
  } GuiMessage;
+
+ typedef struct
+ {
+     lv_obj_t *label; // Label name
+     int data;              // Integer data to be passed
+ } LabelData;
+
+ typedef struct 
+ {
+     lv_obj_t *container_red;
+     lv_obj_t *container_yellow;
+     lv_obj_t *container_green;
+     int data_red;
+     int data_yellow;
+     int data_green;
+ } sensorAlphaUpdate;
  
  
  //------------------------------- GLOBAL DATA ---------------------------------

@@ -44,6 +44,10 @@ extern lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;
+extern lv_obj_t * ui_frontSensorCarImage;
+extern lv_obj_t * ui_frontSensorRedZone;
+extern lv_obj_t * ui_frontSensorYellowZone;
+extern lv_obj_t * ui_frontSensorGreenZone;
 // SCREEN: ui_RadioScreen
 void ui_RadioScreen_screen_init(void);
 extern lv_obj_t * ui_RadioScreen;
@@ -87,6 +91,7 @@ LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.p
 LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
 LV_IMG_DECLARE(ui_img_hvac_background_320x240_png);    // assets/hvac_background_320x240.png
 LV_IMG_DECLARE(ui_img_hvac_vents_120x160_png);    // assets/hvac_vents_120x160.png
+LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
 
 
 

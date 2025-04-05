@@ -40,6 +40,10 @@ lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 lv_obj_t * ui_FrontSensorScreen;
+lv_obj_t * ui_frontSensorCarImage;
+lv_obj_t * ui_frontSensorRedZone;
+lv_obj_t * ui_frontSensorYellowZone;
+lv_obj_t * ui_frontSensorGreenZone;
 
 
 // SCREEN: ui_RadioScreen

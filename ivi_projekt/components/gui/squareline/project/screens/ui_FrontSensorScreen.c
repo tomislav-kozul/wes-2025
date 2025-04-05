@@ -9,6 +9,51 @@ void ui_FrontSensorScreen_screen_init(void)
 {
     ui_FrontSensorScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_FrontSensorScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_FrontSensorScreen, lv_color_hex(0x3E3E3E), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_FrontSensorScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_frontSensorCarImage = lv_img_create(ui_FrontSensorScreen);
+    lv_img_set_src(ui_frontSensorCarImage, &ui_img_841796653);
+    lv_obj_set_width(ui_frontSensorCarImage, LV_SIZE_CONTENT);   /// 250
+    lv_obj_set_height(ui_frontSensorCarImage, LV_SIZE_CONTENT);    /// 444
+    lv_obj_set_x(ui_frontSensorCarImage, 23);
+    lv_obj_set_y(ui_frontSensorCarImage, 161);
+    lv_obj_set_align(ui_frontSensorCarImage, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_frontSensorCarImage, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_frontSensorCarImage, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_frontSensorRedZone = lv_obj_create(ui_FrontSensorScreen);
+    lv_obj_remove_style_all(ui_frontSensorRedZone);
+    lv_obj_set_width(ui_frontSensorRedZone, 100);
+    lv_obj_set_height(ui_frontSensorRedZone, 20);
+    lv_obj_set_x(ui_frontSensorRedZone, 0);
+    lv_obj_set_y(ui_frontSensorRedZone, -23);
+    lv_obj_set_align(ui_frontSensorRedZone, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_frontSensorRedZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_frontSensorRedZone, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_frontSensorYellowZone = lv_obj_create(ui_FrontSensorScreen);
+    lv_obj_remove_style_all(ui_frontSensorYellowZone);
+    lv_obj_set_width(ui_frontSensorYellowZone, 124);
+    lv_obj_set_height(ui_frontSensorYellowZone, 20);
+    lv_obj_set_x(ui_frontSensorYellowZone, 0);
+    lv_obj_set_y(ui_frontSensorYellowZone, -55);
+    lv_obj_set_align(ui_frontSensorYellowZone, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_frontSensorYellowZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_frontSensorYellowZone, lv_color_hex(0xFFF100), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_frontSensorGreenZone = lv_obj_create(ui_FrontSensorScreen);
+    lv_obj_remove_style_all(ui_frontSensorGreenZone);
+    lv_obj_set_width(ui_frontSensorGreenZone, 159);
+    lv_obj_set_height(ui_frontSensorGreenZone, 20);
+    lv_obj_set_x(ui_frontSensorGreenZone, 0);
+    lv_obj_set_y(ui_frontSensorGreenZone, -88);
+    lv_obj_set_align(ui_frontSensorGreenZone, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_frontSensorGreenZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_frontSensorGreenZone, lv_color_hex(0x09FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
 
 
 }
