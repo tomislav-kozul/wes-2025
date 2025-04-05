@@ -19,6 +19,7 @@
 #include "gui.h"
 #include "user_interface.h"
 #include "comms.h"
+#include "temperature_sensor.h"
 
 //----------------------------------- PINS ------------------------------------
 
@@ -60,4 +61,5 @@ void app_main(void)
 {
     comms_init();
     user_interface_init();
+    temp_sensor_task_init();
 }

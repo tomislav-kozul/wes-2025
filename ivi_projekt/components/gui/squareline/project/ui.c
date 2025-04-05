@@ -18,6 +18,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 lv_obj_t * ui_Home_Scr;
+lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
 lv_obj_t * ui_Label2;
@@ -48,6 +51,9 @@ lv_obj_t * ui_RadioScreen;
 void ui_HVACScreen_screen_init(void);
 lv_obj_t * ui_HVACScreen;
 lv_obj_t * ui____initial_actions0;
+const lv_img_dsc_t * ui_imgset_defrost_x[2] = {&ui_img_defrost_16x16_png, &ui_img_defrost_32x32_png};
+const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
+const lv_img_dsc_t * ui_imgset_hvac_background_320x[1] = {&ui_img_hvac_background_320x240_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -320,6 +326,14 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay)
 }
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_Label1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        btn_clicked(e);
+    }
+}
 void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);

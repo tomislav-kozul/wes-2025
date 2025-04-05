@@ -24,6 +24,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 extern lv_obj_t * ui_Home_Scr;
+extern lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+extern lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 extern lv_obj_t * ui_Button3;
 extern lv_obj_t * ui_Label2;
@@ -50,6 +53,10 @@ extern lv_obj_t * ui_HVACScreen;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
+LV_IMG_DECLARE(ui_img_defrost_32x32_png);    // assets/defrost_32x32.png
+LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
+LV_IMG_DECLARE(ui_img_hvac_background_320x240_png);    // assets/hvac_background_320x240.png
 
 
 
