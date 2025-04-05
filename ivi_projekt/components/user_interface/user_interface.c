@@ -108,24 +108,40 @@ static void _user_interface_task(void *p_parameter)
                 printf("4 - %lu\n", button_press_count[3]);
                 break;
             case FRONT_SENSOR_ZONE_GREEN:
-                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                sensorAlphaUpdate sensorAlpha1 = {
+                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
+                    50, 50, 255};
+                xQueueSend(xFrontSensorQueue, &sensorAlpha1, portMAX_DELAY);
                 break;
             case FRONT_SENSOR_ZONE_YELLOW:
-                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                sensorAlphaUpdate sensorAlpha2 = {
+                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
+                    50, 255, 255};
+                xQueueSend(xFrontSensorQueue, &sensorAlpha2, portMAX_DELAY);
                 break;
             case FRONT_SENSOR_ZONE_RED:
-                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                sensorAlphaUpdate sensorAlpha3 = {
+                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
+                    255, 255, 255};
+                xQueueSend(xFrontSensorQueue, &sensorAlpha3, portMAX_DELAY);
                 break;
             case FRONT_SENSOR_ZONE_NONE:
-                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                sensorAlphaUpdate sensorAlpha4 = {
+                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
+                    50, 50, 50};
+                xQueueSend(xFrontSensorQueue, &sensorAlpha4, portMAX_DELAY);
                 break;
             default:
                 printf("Uknown GUI event\n");

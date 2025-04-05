@@ -35,7 +35,7 @@ void ui_FrontSensorScreen_screen_init(void)
 
     ui_frontSensorYellowZone = lv_obj_create(ui_FrontSensorScreen);
     lv_obj_remove_style_all(ui_frontSensorYellowZone);
-    lv_obj_set_width(ui_frontSensorYellowZone, 100);
+    lv_obj_set_width(ui_frontSensorYellowZone, 124);
     lv_obj_set_height(ui_frontSensorYellowZone, 20);
     lv_obj_set_x(ui_frontSensorYellowZone, 0);
     lv_obj_set_y(ui_frontSensorYellowZone, -55);
@@ -46,7 +46,7 @@ void ui_FrontSensorScreen_screen_init(void)
 
     ui_frontSensorGreenZone = lv_obj_create(ui_FrontSensorScreen);
     lv_obj_remove_style_all(ui_frontSensorGreenZone);
-    lv_obj_set_width(ui_frontSensorGreenZone, 100);
+    lv_obj_set_width(ui_frontSensorGreenZone, 159);
     lv_obj_set_height(ui_frontSensorGreenZone, 20);
     lv_obj_set_x(ui_frontSensorGreenZone, 0);
     lv_obj_set_y(ui_frontSensorGreenZone, -88);

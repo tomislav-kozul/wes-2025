@@ -43,10 +43,21 @@ typedef struct
     int data;              // Integer data to be passed
 } LabelData;
 
+typedef struct 
+{
+    lv_obj_t *container_red;
+    lv_obj_t *container_yellow;
+    lv_obj_t *container_green;
+    int data_red;
+    int data_yellow;
+    int data_green;
+} sensorAlphaUpdate;
+
 //------------------------------- GLOBAL DATA ---------------------------------
 extern EventGroupHandle_t xGuiButtonEventGroup;
 extern EventGroupHandle_t xGpioButtonEventGroup;
 extern QueueHandle_t xGuiUpdateQueue;
+extern QueueHandle_t xFrontSensorQueue;
 
 //---------------------- PUBLIC FUNCTION PROTOTYPES --------------------------
 /**
