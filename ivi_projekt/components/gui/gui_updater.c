@@ -35,16 +35,36 @@ void gui_updater_init(void)
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _gui_updater_task(void *p_parameter) {
-    LabelData receivedData;
-
+    GuiMessage receivedData;
+    sensorAlphaUpdate recievedSensorAlpha;
     for (;;)
     {
         // Wait for data from the queue
-        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
+        if (xQueueReceive(xGuiUpdateQueue, &receivedData, 100 / portTICK_PERIOD_MS)) {
+            switch (receivedData.command_type) {
+                case GUI_CMD_UPDATE_LABEL:
+                    /* Try to take the semaphore, call lvgl related function on success */
+                    if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
+                    {
+                        lv_label_set_text(receivedData.update_label.label, receivedData.update_label.text);
+                        xSemaphoreGive(p_gui_semaphore);
+                    }
+                    break;
+                default:
+                    // Handle unknown command
+                    printf("Unknown GUI update command: %d\n", receivedData.command_type);
+                    break;
+            }
+        }
+
+        if (xQueueReceive(xFrontSensorQueue, &recievedSensorAlpha, 100 / portTICK_PERIOD_MS)) {
             /* Try to take the semaphore, call lvgl related function on success */
             if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
             {
-                lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_red, recievedSensorAlpha.data_red, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_yellow, recievedSensorAlpha.data_yellow, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_green, recievedSensorAlpha.data_green, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //printf("set bars");
                 xSemaphoreGive(p_gui_semaphore);
             }
                 

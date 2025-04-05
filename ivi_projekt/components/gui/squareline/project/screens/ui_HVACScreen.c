@@ -9,6 +9,133 @@ void ui_HVACScreen_screen_init(void)
 {
     ui_HVACScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_HVACScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_HVACScreen, lv_color_hex(0x9E9FA1), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HVACScreen, 125, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_opa(ui_HVACScreen, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui_HVACScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui_HVACScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_top(ui_HVACScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui_HVACScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Image3 = lv_img_create(ui_HVACScreen);
+    lv_img_set_src(ui_Image3, &ui_img_hvac_background_280x205_png);
+    lv_obj_set_width(ui_Image3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Image3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Image3, 23);
+    lv_obj_set_y(ui_Image3, 17);
+    lv_obj_set_align(ui_Image3, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Image3, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Image3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_img_recolor(ui_Image3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_Image3, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_DateTimeLabel = lv_label_create(ui_HVACScreen);
+    lv_obj_set_width(ui_DateTimeLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_DateTimeLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_DateTimeLabel, -1);
+    lv_obj_set_y(ui_DateTimeLabel, -103);
+    lv_obj_set_align(ui_DateTimeLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_DateTimeLabel, "HH:MM DD.MM.YYYY.");
+    lv_obj_set_style_text_color(ui_DateTimeLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_DateTimeLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HomeButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_HomeButton, 40);
+    lv_obj_set_height(ui_HomeButton, 40);
+    lv_obj_set_x(ui_HomeButton, -136);
+    lv_obj_set_y(ui_HomeButton, -64);
+    lv_obj_set_align(ui_HomeButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HomeButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HomeButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HomeButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HomeButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HomeButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_RadioButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_RadioButton, 40);
+    lv_obj_set_height(ui_RadioButton, 40);
+    lv_obj_set_x(ui_RadioButton, -136);
+    lv_obj_set_y(ui_RadioButton, -17);
+    lv_obj_set_align(ui_RadioButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_RadioButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_RadioButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_RadioButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_RadioButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_RadioButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HVACButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_HVACButton, 40);
+    lv_obj_set_height(ui_HVACButton, 40);
+    lv_obj_set_x(ui_HVACButton, -136);
+    lv_obj_set_y(ui_HVACButton, 30);
+    lv_obj_set_align(ui_HVACButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HVACButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HVACButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HVACButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HVACButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HVACButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_SettingsButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_SettingsButton, 40);
+    lv_obj_set_height(ui_SettingsButton, 40);
+    lv_obj_set_x(ui_SettingsButton, -136);
+    lv_obj_set_y(ui_SettingsButton, 77);
+    lv_obj_set_align(ui_SettingsButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_SettingsButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_SettingsButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_SettingsButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SettingsButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_SeatControlButton1 = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_SeatControlButton1, 20);
+    lv_obj_set_height(ui_SeatControlButton1, 20);
+    lv_obj_set_x(ui_SeatControlButton1, -39);
+    lv_obj_set_y(ui_SeatControlButton1, 41);
+    lv_obj_set_align(ui_SeatControlButton1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SeatControlButton1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_SeatControlButton1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SeatControlButton1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SeatControlButton1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_SeatControlButton2 = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_SeatControlButton2, 20);
+    lv_obj_set_height(ui_SeatControlButton2, 18);
+    lv_obj_set_x(ui_SeatControlButton2, 87);
+    lv_obj_set_y(ui_SeatControlButton2, 45);
+    lv_obj_set_align(ui_SeatControlButton2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SeatControlButton2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_SeatControlButton2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SeatControlButton2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SeatControlButton2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ACControlButton = lv_btn_create(ui_HVACScreen);
+    lv_obj_set_width(ui_ACControlButton, 20);
+    lv_obj_set_height(ui_ACControlButton, 18);
+    lv_obj_set_x(ui_ACControlButton, 24);
+    lv_obj_set_y(ui_ACControlButton, -35);
+    lv_obj_set_align(ui_ACControlButton, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ACControlButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_ACControlButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_ACControlButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ACControlButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_temperatureLabel = lv_label_create(ui_HVACScreen);
+    lv_obj_set_width(ui_temperatureLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_temperatureLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_temperatureLabel, -9);
+    lv_obj_set_y(ui_temperatureLabel, 9);
+    lv_obj_set_align(ui_temperatureLabel, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_temperatureLabel, "°C");
+    lv_obj_set_style_text_color(ui_temperatureLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_temperatureLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_temperatureLabel, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_HomeButton, ui_event_HomeButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_RadioButton, ui_event_RadioButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HVACButton, ui_event_HVACButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SeatControlButton1, ui_event_SeatControlButton1, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SeatControlButton2, ui_event_SeatControlButton2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ACControlButton, ui_event_ACControlButton, LV_EVENT_ALL, NULL);
 
 }

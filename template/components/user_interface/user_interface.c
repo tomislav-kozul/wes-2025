@@ -44,7 +44,7 @@ void user_interface_init(void)
 {
     led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
-    led_init(GPIO_LED_GREEN);
+    //led_init(GPIO_LED_GREEN);
     button1_init();
     button2_init();
     button3_init();

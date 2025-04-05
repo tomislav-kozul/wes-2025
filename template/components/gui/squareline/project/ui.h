@@ -41,6 +41,10 @@ extern lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;
+extern lv_obj_t * ui_frontSensorRedZone;
+extern lv_obj_t * ui_frontSensorYellowZone;
+extern lv_obj_t * ui_fontSensorGreenZone;
+extern lv_obj_t * ui_frontSensorImage;
 // SCREEN: ui_RadioScreen
 void ui_RadioScreen_screen_init(void);
 extern lv_obj_t * ui_RadioScreen;
@@ -50,6 +54,7 @@ extern lv_obj_t * ui_HVACScreen;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
 
 
 

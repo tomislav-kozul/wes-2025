@@ -1,0 +1,1 @@
+void temp_sensor_task_init(void);

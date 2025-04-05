@@ -23,3 +23,11 @@ void jebena_funkcija(lv_event_t * e)
 		xGuiButtonEventGroup,				  /* The event group being updated. */
 		GUI_APP_EVENT_BUTTON_JEBENI_PRESSED); /* The bits being set. */
 }
+
+void updateSetTemperatureLabel(lv_event_t * e)
+{
+	// Your code here
+	lv_obj_t * arc = lv_event_get_target(e);
+	int value = lv_arc_get_value(arc);
+	xQueueSend(xTempSetQueue, ( void * ) &value, portMAX_DELAY);
+}

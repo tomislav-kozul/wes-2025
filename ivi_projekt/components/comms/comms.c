@@ -20,6 +20,9 @@
 EventGroupHandle_t xGuiButtonEventGroup;
 EventGroupHandle_t xGpioButtonEventGroup;
 QueueHandle_t xGuiUpdateQueue;
+QueueHandle_t xTempReadingQueue;
+QueueHandle_t xTempSetQueue;
+QueueHandle_t xFrontSensorQueue;
 
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void comms_init(void) {
@@ -37,14 +40,33 @@ void comms_init(void) {
         return;
     }
 
-    xGuiUpdateQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(LabelData));
+    xGuiUpdateQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(GuiMessage));
     if(xGuiUpdateQueue == NULL)
     {
         printf("The xGuiUpdateQueue queue was not initialized successfully\n");
         return;
     }
 
+    xTempReadingQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(float));
+    if(xTempReadingQueue == NULL)
+    {
+        printf("The xTempReadingQueue queue was not initialized successfully\n");
+        return;
+    }
+
+    xTempSetQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(int));
+    if(xTempSetQueue == NULL)
+    {
+        printf("The xTempSetQueue queue was not initialized successfully\n");
+        return;
+    }
+
+    xFrontSensorQueue = xQueueCreate(USER_INTERFACE_QUEUE_SIZE, sizeof(sensorAlphaUpdate));
+    if(xFrontSensorQueue == NULL)
+    {
+        printf("The xFrontSensorQueue queue was not initialized successfully\n");
+        return;
+    }
 }
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
-

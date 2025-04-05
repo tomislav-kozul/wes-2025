@@ -24,6 +24,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 extern lv_obj_t * ui_Home_Scr;
+extern lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+extern lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 extern lv_obj_t * ui_Button3;
 extern lv_obj_t * ui_Label2;
@@ -41,15 +44,51 @@ extern lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;
+extern lv_obj_t * ui_frontSensorCarImage;
+extern lv_obj_t * ui_frontSensorRedZone;
+extern lv_obj_t * ui_frontSensorYellowZone;
+extern lv_obj_t * ui_frontSensorGreenZone;
 // SCREEN: ui_RadioScreen
 void ui_RadioScreen_screen_init(void);
 extern lv_obj_t * ui_RadioScreen;
 // SCREEN: ui_HVACScreen
 void ui_HVACScreen_screen_init(void);
 extern lv_obj_t * ui_HVACScreen;
+extern lv_obj_t * ui_Image3;
+extern lv_obj_t * ui_DateTimeLabel;
+void ui_event_HomeButton(lv_event_t * e);
+extern lv_obj_t * ui_HomeButton;
+void ui_event_RadioButton(lv_event_t * e);
+extern lv_obj_t * ui_RadioButton;
+void ui_event_HVACButton(lv_event_t * e);
+extern lv_obj_t * ui_HVACButton;
+extern lv_obj_t * ui_SettingsButton;
+void ui_event_SeatControlButton1(lv_event_t * e);
+extern lv_obj_t * ui_SeatControlButton1;
+void ui_event_SeatControlButton2(lv_event_t * e);
+extern lv_obj_t * ui_SeatControlButton2;
+void ui_event_ACControlButton(lv_event_t * e);
+extern lv_obj_t * ui_ACControlButton;
+extern lv_obj_t * ui_temperatureLabel;
+// SCREEN: ui_ACControlScreen
+void ui_ACControlScreen_screen_init(void);
+extern lv_obj_t * ui_ACControlScreen;
+void ui_event_Arc1(lv_event_t * e);
+extern lv_obj_t * ui_Arc1;
+extern lv_obj_t * ui_SetTemperature;
+void ui_event_Button2(lv_event_t * e);
+extern lv_obj_t * ui_Button2;
+extern lv_obj_t * ui_Image2;
+void ui_event_HomeButtonAC(lv_event_t * e);
+extern lv_obj_t * ui_HomeButtonAC;
+extern lv_obj_t * ui_temperatureLabelAC;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
+LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
+LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.png
 
 
 
