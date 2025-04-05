@@ -85,13 +85,10 @@ extern lv_obj_t * ui_temperatureLabelAC;
 extern lv_obj_t * ui____initial_actions0;
 
 
-LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
-LV_IMG_DECLARE(ui_img_defrost_32x32_png);    // assets/defrost_32x32.png
-LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.png
-LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
-LV_IMG_DECLARE(ui_img_hvac_background_320x240_png);    // assets/hvac_background_320x240.png
-LV_IMG_DECLARE(ui_img_hvac_vents_120x160_png);    // assets/hvac_vents_120x160.png
 LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
+LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
+LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.png
 
 
 

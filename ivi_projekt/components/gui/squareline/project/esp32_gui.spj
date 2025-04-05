@@ -10106,7 +10106,7 @@
               {
                 "disabled": false,
                 "nid": -1103324423,
-                "strtype": "ARC/EventHandler",
+                "strtype": "_event/EventHandler",
                 "strval": "VALUE_CHANGED",
                 "childs": [
                   {
@@ -10129,7 +10129,7 @@
                   },
                   {
                     "nid": 14698103,
-                    "strtype": "_custom/action",
+                    "strtype": "_event/action",
                     "strval": "CALL FUNCTION",
                     "childs": [
                       {
@@ -10220,8 +10220,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Size",
                 "intarray": [
-                  65,
-                  64
+                  45,
+                  45
                 ],
                 "InheritedType": 7
               },
@@ -10443,7 +10443,7 @@
                       {
                         "nid": -1065083509,
                         "strtype": "_style/Bg_Image",
-                        "strval": "assets/defrost_32x32.png",
+                        "strval": "assets/defrost_16x16.png",
                         "InheritedType": 5
                       },
                       {
@@ -14060,7 +14060,7 @@
     "theme_color2": 0,
     "uiExportFolderPath": "...",
     "projectExportFolderPath": "...",
-    "backup_cnt": 162,
+    "backup_cnt": 168,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "C_FILE",

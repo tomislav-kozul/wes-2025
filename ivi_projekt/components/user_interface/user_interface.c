@@ -24,6 +24,7 @@
 #include <stdio.h>
 
 //---------------------------------- MACROS -----------------------------------
+#define INIT_DELAY 500
 
 //-------------------------------- DATA TYPES ---------------------------------
 
@@ -47,13 +48,14 @@ void user_interface_init(void)
 
     led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
-    led_init(GPIO_LED_GREEN);
     button1_init();
     button2_init();
     button3_init();
     button4_init();
     gui_init();
     gui_updater_init();
+    
+    vTaskDelay(INIT_DELAY / portTICK_PERIOD_MS);
 
     // izrada taska koji provjerava red poruka
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))

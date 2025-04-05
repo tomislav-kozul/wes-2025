@@ -38,8 +38,8 @@ void ui_ACControlScreen_screen_init(void)
     lv_obj_set_style_text_font(ui_SetTemperature, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Button2 = lv_btn_create(ui_ACControlScreen);
-    lv_obj_set_width(ui_Button2, 65);
-    lv_obj_set_height(ui_Button2, 64);
+    lv_obj_set_width(ui_Button2, 45);
+    lv_obj_set_height(ui_Button2, 45);
     lv_obj_set_x(ui_Button2, 68);
     lv_obj_set_y(ui_Button2, 80);
     lv_obj_set_align(ui_Button2, LV_ALIGN_CENTER);
@@ -47,7 +47,7 @@ void ui_ACControlScreen_screen_init(void)
     lv_obj_clear_flag(ui_Button2, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Button2, lv_color_hex(0xA1A1A1), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Button2, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(ui_Button2, &ui_img_defrost_32x32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_Button2, &ui_img_defrost_16x16_png, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_color(ui_Button2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_opa(ui_Button2, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(ui_Button2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_CHECKED);

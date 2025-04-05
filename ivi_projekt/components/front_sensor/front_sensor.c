@@ -17,8 +17,9 @@
 #define SOUND_SPEED 0.034
 #define CM_TO_INCH 0.393701
 
-#define TRIGGER_GPIO 21
-#define ECHO_GPIO 22
+#define TRIGGER_GPIO 27
+#define ECHO_GPIO 26
+
 
 //------------------------- STATIC DATA & CONSTANTS ---------------------------
 

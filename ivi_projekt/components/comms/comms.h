@@ -76,6 +76,7 @@
  extern EventGroupHandle_t xGuiButtonEventGroup;
  extern EventGroupHandle_t xGpioButtonEventGroup;
  extern QueueHandle_t xGuiUpdateQueue;
+ extern QueueHandle_t xFrontSensorQueue;
  extern QueueHandle_t xTempReadingQueue;
  extern QueueHandle_t xTempSetQueue;
  

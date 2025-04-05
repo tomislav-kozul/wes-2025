@@ -85,10 +85,8 @@ void ui_event_HomeButtonAC(lv_event_t * e);
 lv_obj_t * ui_HomeButtonAC;
 lv_obj_t * ui_temperatureLabelAC;
 lv_obj_t * ui____initial_actions0;
-const lv_img_dsc_t * ui_imgset_defrost_x[2] = {&ui_img_defrost_16x16_png, &ui_img_defrost_32x32_png};
+const lv_img_dsc_t * ui_imgset_defrost_x[1] = {&ui_img_defrost_16x16_png};
 const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
-const lv_img_dsc_t * ui_imgset_hvac_background_320x[1] = {&ui_img_hvac_background_320x240_png};
-const lv_img_dsc_t * ui_imgset_hvac_vents_120x[1] = {&ui_img_hvac_vents_120x160_png};
 const lv_img_dsc_t * ui_imgset_hvac_vents_240x[1] = {&ui_img_hvac_vents_240x205_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
