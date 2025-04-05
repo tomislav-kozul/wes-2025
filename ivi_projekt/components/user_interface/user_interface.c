@@ -154,50 +154,6 @@ static void _user_interface_task(void *p_parameter)
 }
 
 
-/*static void _time_display_task(void *p_parameter)
-{
-    struct tm timeinfo;
-    int last_minute = -1;
-
-    char time_str[16];
-    char date_str[16];
-
-    while (1)
-    {
-        time_t now = time(NULL);
-        localtime_r(&now, &timeinfo);
-        printf("Task dode");
-        if (timeinfo.tm_min != last_minute)
-        {
-            last_minute = timeinfo.tm_min;
-
-            // Format time and date (e.g. "14:05", "2024-04-08")
-            strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
-            strftime(date_str, sizeof(date_str), "%Y-%m-%d", &timeinfo);
-
-            // Send time label
-            LabelData timeLabel = {
-                .label = ui_currentTimeHome,
-                .label_type = LABEL_TYPE_TEXT
-            };
-            snprintf(timeLabel.content.text, sizeof(timeLabel.content.text), "%s", time_str);
-            xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
-
-            // Send date label
-            LabelData dateLabel = {
-                .label = ui_currentDateHome,
-                .label_type = LABEL_TYPE_TEXT
-            };
-            snprintf(dateLabel.content.text, sizeof(dateLabel.content.text), "%s", date_str);
-            xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
-        }
-
-        //int delay_ms = (60 - timeinfo.tm_sec) * 1000;
-        vTaskDelay(pdMS_TO_TICKS(1000)); //delay for just how long it is until the next minute
-    }
-}*/
-
-
 //---------------------------- INTERRUPT HANDLERS -----------------------------
 
 static void vTimeUpdateCallback(TimerHandle_t xTimer)

@@ -135,10 +135,37 @@ static void sntp_wait_for_sync(void)
     for (int i = 0; i < 10; ++i) {
         if (sntp_get_sync_status() == SNTP_SYNC_STATUS_COMPLETED) {
             ESP_LOGI(TAG, "Time synchronized.");
-            
+            time_t now;
+            struct tm timeinfo;
+            char time_str[16];
+            char date_str[16];
+
+            time(&now);
+            localtime_r(&now, &timeinfo);
+
+            // Format the time and date strings
+            strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
+            strftime(date_str, sizeof(date_str), "%Y-%m-%d", &timeinfo);
+
+            // Create LabelData structures for time and date
+            LabelData timeLabel = {
+                .label = ui_currentTimeHome,
+                .label_type = LABEL_TYPE_TEXT
+            };
+            snprintf(timeLabel.content.text, sizeof(timeLabel.content.text), "%s", time_str);
+
+            LabelData dateLabel = {
+                .label = ui_currentDateHome,
+                .label_type = LABEL_TYPE_TEXT
+            };
+            snprintf(dateLabel.content.text, sizeof(dateLabel.content.text), "%s", date_str);
+
+            // Send the updated labels to the GUI update queue
+            xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+            xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
             break;
         }
         ESP_LOGI(TAG, "Waiting for time sync... (%d/10)", i+1);
-        vTaskDelay(pdMS_TO_TICKS(2000));
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
