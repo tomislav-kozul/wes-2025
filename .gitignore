@@ -58,3 +58,8 @@ dkms.conf
 # vsc
 **/.vscode
 **/vscode
+
+# sdkconfig
+**/sdkconfig
+**/sdkconfig.bytelab
+**/sdkconfig.vidi
