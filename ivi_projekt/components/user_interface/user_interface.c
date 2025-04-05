@@ -20,6 +20,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "front_sensor.h"
 #include <stdio.h>
 
 //---------------------------------- MACROS -----------------------------------
@@ -42,6 +43,8 @@ static TaskHandle_t p_user_interface_task = NULL;
 //------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
+    front_sensor_init();
+
     led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
     led_init(GPIO_LED_GREEN);
@@ -74,7 +77,11 @@ static void _user_interface_task(void *p_parameter)
                 | GPIO_BUTTON_1_PRESS
                 | GPIO_BUTTON_2_PRESS
                 | GPIO_BUTTON_3_PRESS
-                | GPIO_BUTTON_4_PRESS, 
+                | GPIO_BUTTON_4_PRESS
+                | FRONT_SENSOR_ZONE_GREEN
+                | FRONT_SENSOR_ZONE_YELLOW
+                | FRONT_SENSOR_ZONE_RED
+                | FRONT_SENSOR_ZONE_NONE, 
             pdTRUE, pdFALSE, portMAX_DELAY)))
         {
             printf("GUI event received %ld\n", uxBits);
@@ -99,6 +106,26 @@ static void _user_interface_task(void *p_parameter)
                 break;
             case GPIO_BUTTON_4_PRESS:
                 printf("4 - %lu\n", button_press_count[3]);
+                break;
+            case FRONT_SENSOR_ZONE_GREEN:
+                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                break;
+            case FRONT_SENSOR_ZONE_YELLOW:
+                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                break;
+            case FRONT_SENSOR_ZONE_RED:
+                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+                break;
+            case FRONT_SENSOR_ZONE_NONE:
+                lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
                 break;
             default:
                 printf("Uknown GUI event\n");

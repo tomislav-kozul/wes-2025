@@ -40,7 +40,7 @@ static void _gui_updater_task(void *p_parameter) {
     for (;;)
     {
         // Wait for data from the queue
-        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
+        if (xQueueReceive(xGuiUpdateQueue, &receivedData, 100 / portTICK_PERIOD_MS)) {
             /* Try to take the semaphore, call lvgl related function on success */
             if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
             {

@@ -24,6 +24,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 extern lv_obj_t * ui_Home_Scr;
+extern lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+extern lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 extern lv_obj_t * ui_Button3;
 extern lv_obj_t * ui_Label2;
@@ -41,6 +44,10 @@ extern lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;
+extern lv_obj_t * ui_frontSensorCarImage;
+extern lv_obj_t * ui_frontSensorRedZone;
+extern lv_obj_t * ui_frontSensorYellowZone;
+extern lv_obj_t * ui_frontSensorGreenZone;
 // SCREEN: ui_RadioScreen
 void ui_RadioScreen_screen_init(void);
 extern lv_obj_t * ui_RadioScreen;
@@ -50,6 +57,7 @@ extern lv_obj_t * ui_HVACScreen;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
 
 
 

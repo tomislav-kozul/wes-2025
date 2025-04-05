@@ -18,6 +18,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 lv_obj_t * ui_Home_Scr;
+lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
 lv_obj_t * ui_Label2;
@@ -37,6 +40,10 @@ lv_obj_t * ui_Label6;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 lv_obj_t * ui_FrontSensorScreen;
+lv_obj_t * ui_frontSensorCarImage;
+lv_obj_t * ui_frontSensorRedZone;
+lv_obj_t * ui_frontSensorYellowZone;
+lv_obj_t * ui_frontSensorGreenZone;
 
 
 // SCREEN: ui_RadioScreen
@@ -320,6 +327,14 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay)
 }
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_Label1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        btn_clicked(e);
+    }
+}
 void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);

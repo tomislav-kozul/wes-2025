@@ -25,6 +25,11 @@ extern "C" {
 #define GPIO_BUTTON_3_PRESS     (1 << 3)
 #define GPIO_BUTTON_4_PRESS     (1 << 4)
 
+#define FRONT_SENSOR_ZONE_RED       (1 << 10)
+#define FRONT_SENSOR_ZONE_YELLOW    (1 << 11)
+#define FRONT_SENSOR_ZONE_GREEN     (1 << 12)
+#define FRONT_SENSOR_ZONE_NONE      (1 << 13)
+
 #define USER_INTERFACE_QUEUE_SIZE (20U)
 
 //-------------------------------- DATA TYPES ---------------------------------
