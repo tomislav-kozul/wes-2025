@@ -43,7 +43,7 @@ ultrasonic_sensor_t sensor = {
 {
     ultrasonic_init(&sensor);
 
-    printf("Front sensor\n");
+    //printf("Front sensor\n");
     xTaskCreate(&_read_front_sensor_task, "front_sensor_task", 2 * 1024, NULL, 5, NULL);
 }
 

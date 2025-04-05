@@ -61,10 +61,10 @@ static void _gui_updater_task(void *p_parameter) {
             /* Try to take the semaphore, call lvgl related function on success */
             if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
             {
-                //lv_obj_set_style_bg_opa(recievedSensorAlpha.container_red, recievedSensorAlpha.data_red, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(recievedSensorAlpha.container_yellow, recievedSensorAlpha.data_yellow, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(recievedSensorAlpha.container_green, recievedSensorAlpha.data_green, LV_PART_MAIN | LV_STATE_DEFAULT);
-                printf("set bars");
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_red, recievedSensorAlpha.data_red, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_yellow, recievedSensorAlpha.data_yellow, LV_PART_MAIN | LV_STATE_DEFAULT);
+                lv_obj_set_style_bg_opa(recievedSensorAlpha.container_green, recievedSensorAlpha.data_green, LV_PART_MAIN | LV_STATE_DEFAULT);
+                //printf("set bars");
                 xSemaphoreGive(p_gui_semaphore);
             }
                 
