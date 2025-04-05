@@ -2,6 +2,7 @@
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "comms.h"
 
 #define UART_STACK_SIZE             (4096)
 
@@ -66,6 +67,7 @@ void _temp_sensor_task(void *arg) {
         sht3x_stop_periodic_measurement();
 
         ESP_LOGI(SENSORS_TAG, "Temperature %2.1f °%c - Humidity %2.1f%%", temperature, scale, humidity);
+        xQueueSend(xTempReadingQueue, ( void * ) &temperature, portMAX_DELAY);
         vTaskDelay(SLEEP_DELAY / portTICK_PERIOD_MS);
     }
 }

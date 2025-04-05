@@ -9,21 +9,39 @@ void ui_ACControlScreen_screen_init(void)
 {
     ui_ACControlScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_ACControlScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_ACControlScreen, lv_color_hex(0x9E9FA1), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ACControlScreen, 125, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Arc1 = lv_arc_create(ui_ACControlScreen);
-    lv_obj_set_width(ui_Arc1, 150);
-    lv_obj_set_height(ui_Arc1, 150);
-    lv_obj_set_x(ui_Arc1, -4);
-    lv_obj_set_y(ui_Arc1, 2);
+    lv_obj_set_width(ui_Arc1, 125);
+    lv_obj_set_height(ui_Arc1, 125);
+    lv_obj_set_x(ui_Arc1, 92);
+    lv_obj_set_y(ui_Arc1, -7);
     lv_obj_set_align(ui_Arc1, LV_ALIGN_CENTER);
-    lv_arc_set_value(ui_Arc1, 50);
+    lv_arc_set_range(ui_Arc1, 16, 32);
+    lv_arc_set_value(ui_Arc1, 24);
 
+    lv_obj_set_style_bg_color(ui_Arc1, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Arc1, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_SetTemperature = lv_label_create(ui_Arc1);
+    lv_obj_set_width(ui_SetTemperature, LV_SIZE_CONTENT);   /// 2
+    lv_obj_set_height(ui_SetTemperature, LV_SIZE_CONTENT);    /// 2
+    lv_obj_set_x(ui_SetTemperature, 1);
+    lv_obj_set_y(ui_SetTemperature, -4);
+    lv_obj_set_align(ui_SetTemperature, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SetTemperature, "°C");
+    lv_obj_set_style_text_color(ui_SetTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SetTemperature, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui_SetTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui_SetTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SetTemperature, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Button2 = lv_btn_create(ui_ACControlScreen);
     lv_obj_set_width(ui_Button2, 65);
     lv_obj_set_height(ui_Button2, 64);
-    lv_obj_set_x(ui_Button2, -115);
-    lv_obj_set_y(ui_Button2, -76);
+    lv_obj_set_x(ui_Button2, 68);
+    lv_obj_set_y(ui_Button2, 80);
     lv_obj_set_align(ui_Button2, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Button2, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -35,6 +53,44 @@ void ui_ACControlScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_Button2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_CHECKED);
     lv_obj_set_style_bg_opa(ui_Button2, 255, LV_PART_MAIN | LV_STATE_CHECKED);
 
+    ui_Image2 = lv_img_create(ui_ACControlScreen);
+    lv_img_set_src(ui_Image2, &ui_img_hvac_vents_240x205_png);
+    lv_obj_set_width(ui_Image2, LV_SIZE_CONTENT);   /// 180
+    lv_obj_set_height(ui_Image2, LV_SIZE_CONTENT);    /// 240
+    lv_obj_set_x(ui_Image2, -45);
+    lv_obj_set_y(ui_Image2, 23);
+    lv_obj_set_align(ui_Image2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Image2, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_Image2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_img_set_zoom(ui_Image2, 200);
+    lv_obj_set_style_img_recolor(ui_Image2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_Image2, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HomeButtonAC = lv_btn_create(ui_ACControlScreen);
+    lv_obj_set_width(ui_HomeButtonAC, 40);
+    lv_obj_set_height(ui_HomeButtonAC, 40);
+    lv_obj_set_x(ui_HomeButtonAC, -139);
+    lv_obj_set_y(ui_HomeButtonAC, -49);
+    lv_obj_set_align(ui_HomeButtonAC, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HomeButtonAC, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HomeButtonAC, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HomeButtonAC, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HomeButtonAC, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HomeButtonAC, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_temperatureLabelAC = lv_label_create(ui_ACControlScreen);
+    lv_obj_set_width(ui_temperatureLabelAC, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_temperatureLabelAC, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_temperatureLabelAC, -13);
+    lv_obj_set_y(ui_temperatureLabelAC, 9);
+    lv_obj_set_align(ui_temperatureLabelAC, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_temperatureLabelAC, "°C");
+    lv_obj_set_style_text_color(ui_temperatureLabelAC, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_temperatureLabelAC, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_temperatureLabelAC, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_Arc1, ui_event_Arc1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button2, ui_event_Button2, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HomeButtonAC, ui_event_HomeButtonAC, LV_EVENT_ALL, NULL);
 
 }

@@ -65,6 +65,8 @@ static void _user_interface_task(void *p_parameter)
 {
     EventBits_t uxBits;
     int labelValue = 0;
+    float receivedTemp = 0.0f;
+    int setTemp = 0;
 
     for (;;)
     {
@@ -75,7 +77,7 @@ static void _user_interface_task(void *p_parameter)
                 | GPIO_BUTTON_2_PRESS
                 | GPIO_BUTTON_3_PRESS
                 | GPIO_BUTTON_4_PRESS, 
-            pdTRUE, pdFALSE, portMAX_DELAY)))
+            pdTRUE, pdFALSE, 80 / portTICK_PERIOD_MS)))
         {
             printf("GUI event received %ld\n", uxBits);
 
@@ -85,8 +87,7 @@ static void _user_interface_task(void *p_parameter)
             case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
                 led_toggle(GPIO_LED_BLUE);
                 labelValue++;
-                LabelData labelData = {ui_ButtonPressCounter, labelValue};
-                xQueueSend(xGuiUpdateQueue, &labelData, portMAX_DELAY);
+
                 break;
             case GPIO_BUTTON_1_PRESS:
                 printf("1 - %lu\n", button_press_count[0]);
@@ -104,6 +105,30 @@ static void _user_interface_task(void *p_parameter)
                 printf("Uknown GUI event\n");
                 break;
             }
+        }
+
+        if(xQueueReceive(xTempReadingQueue, &receivedTemp, 20 / portTICK_PERIOD_MS)) {
+            GuiMessage guiMessage = {
+                .command_type = GUI_CMD_UPDATE_LABEL,
+                .update_label = {
+                    .label = ui_temperatureLabel,
+                    .text = ""
+                }
+            };
+            snprintf(guiMessage.update_label.text, sizeof(guiMessage.update_label.text), "%2.1f °C", receivedTemp);
+            xQueueSend(xGuiUpdateQueue, &guiMessage, portMAX_DELAY);
+        }
+
+        if(xQueueReceive(xTempSetQueue, &setTemp, 20 / portTICK_PERIOD_MS)) {
+            GuiMessage guiMessage = {
+                .command_type = GUI_CMD_UPDATE_LABEL,
+                .update_label = {
+                    .label = ui_SetTemperature,
+                    .text = ""
+                }
+            };
+            snprintf(guiMessage.update_label.text, sizeof(guiMessage.update_label.text), "%d °C", setTemp);
+            xQueueSend(xGuiUpdateQueue, &guiMessage, portMAX_DELAY);
         }
     }
 }

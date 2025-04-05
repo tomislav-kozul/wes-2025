@@ -35,19 +35,26 @@ void gui_updater_init(void)
 
 //---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _gui_updater_task(void *p_parameter) {
-    LabelData receivedData;
+    GuiMessage receivedData;
 
     for (;;)
     {
         // Wait for data from the queue
         if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
-            /* Try to take the semaphore, call lvgl related function on success */
-            if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
-            {
-                lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
-                xSemaphoreGive(p_gui_semaphore);
+            switch (receivedData.command_type) {
+                case GUI_CMD_UPDATE_LABEL:
+                    /* Try to take the semaphore, call lvgl related function on success */
+                    if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
+                    {
+                        lv_label_set_text(receivedData.update_label.label, receivedData.update_label.text);
+                        xSemaphoreGive(p_gui_semaphore);
+                    }
+                    break;
+                default:
+                    // Handle unknown command
+                    printf("Unknown GUI update command: %d\n", receivedData.command_type);
+                    break;
             }
-                
         }
     }
 }

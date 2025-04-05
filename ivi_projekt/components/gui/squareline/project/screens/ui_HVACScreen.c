@@ -120,6 +120,17 @@ void ui_HVACScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_ACControlButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_ACControlButton, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_temperatureLabel = lv_label_create(ui_HVACScreen);
+    lv_obj_set_width(ui_temperatureLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_temperatureLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_temperatureLabel, -9);
+    lv_obj_set_y(ui_temperatureLabel, 9);
+    lv_obj_set_align(ui_temperatureLabel, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_temperatureLabel, "°C");
+    lv_obj_set_style_text_color(ui_temperatureLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_temperatureLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_temperatureLabel, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_HomeButton, ui_event_HomeButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_RadioButton, ui_event_RadioButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HVACButton, ui_event_HVACButton, LV_EVENT_ALL, NULL);

@@ -65,18 +65,27 @@ void ui_event_SeatControlButton2(lv_event_t * e);
 lv_obj_t * ui_SeatControlButton2;
 void ui_event_ACControlButton(lv_event_t * e);
 lv_obj_t * ui_ACControlButton;
+lv_obj_t * ui_temperatureLabel;
 
 
 // SCREEN: ui_ACControlScreen
 void ui_ACControlScreen_screen_init(void);
 lv_obj_t * ui_ACControlScreen;
+void ui_event_Arc1(lv_event_t * e);
 lv_obj_t * ui_Arc1;
+lv_obj_t * ui_SetTemperature;
 void ui_event_Button2(lv_event_t * e);
 lv_obj_t * ui_Button2;
+lv_obj_t * ui_Image2;
+void ui_event_HomeButtonAC(lv_event_t * e);
+lv_obj_t * ui_HomeButtonAC;
+lv_obj_t * ui_temperatureLabelAC;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_defrost_x[2] = {&ui_img_defrost_16x16_png, &ui_img_defrost_32x32_png};
 const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
 const lv_img_dsc_t * ui_imgset_hvac_background_320x[1] = {&ui_img_hvac_background_320x240_png};
+const lv_img_dsc_t * ui_imgset_hvac_vents_120x[1] = {&ui_img_hvac_vents_120x160_png};
+const lv_img_dsc_t * ui_imgset_hvac_vents_240x[1] = {&ui_img_hvac_vents_240x205_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -437,12 +446,28 @@ void ui_event_ACControlButton(lv_event_t * e)
         _ui_screen_change(&ui_ACControlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_ACControlScreen_screen_init);
     }
 }
+void ui_event_Arc1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        updateSetTemperatureLabel(e);
+    }
+}
 void ui_event_Button2(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_state_modify(ui_Button2, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+    }
+}
+void ui_event_HomeButtonAC(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Home_Scr, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Home_Scr_screen_init);
     }
 }
 
