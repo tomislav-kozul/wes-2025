@@ -12,11 +12,28 @@ void ui_Home_Scr_screen_init(void)
     lv_obj_set_style_bg_color(ui_Home_Scr, lv_color_hex(0x111111), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Home_Scr, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Button1 = lv_btn_create(ui_Home_Scr);
+    lv_obj_set_width(ui_Button1, 100);
+    lv_obj_set_height(ui_Button1, 50);
+    lv_obj_set_x(ui_Button1, -90);
+    lv_obj_set_y(ui_Button1, -49);
+    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Label1 = lv_label_create(ui_Button1);
+    lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label1, 1);
+    lv_obj_set_y(ui_Label1, 1);
+    lv_obj_set_align(ui_Label1, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label1, "Button");
+
     ui_Button3 = lv_btn_create(ui_Home_Scr);
     lv_obj_set_width(ui_Button3, 100);
     lv_obj_set_height(ui_Button3, 50);
-    lv_obj_set_x(ui_Button3, 22);
-    lv_obj_set_y(ui_Button3, -81);
+    lv_obj_set_x(ui_Button3, 39);
+    lv_obj_set_y(ui_Button3, -47);
     lv_obj_set_align(ui_Button3, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_Button3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -32,8 +49,8 @@ void ui_Home_Scr_screen_init(void)
     ui_Label3 = lv_label_create(ui_Home_Scr);
     lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label3, 113);
-    lv_obj_set_y(ui_Label3, -94);
+    lv_obj_set_x(ui_Label3, 94);
+    lv_obj_set_y(ui_Label3, 64);
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "Counter:");
     lv_obj_set_style_text_color(ui_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -42,8 +59,8 @@ void ui_Home_Scr_screen_init(void)
     ui_ButtonPressCounter = lv_label_create(ui_Home_Scr);
     lv_obj_set_width(ui_ButtonPressCounter, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ButtonPressCounter, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_ButtonPressCounter, 107);
-    lv_obj_set_y(ui_ButtonPressCounter, -68);
+    lv_obj_set_x(ui_ButtonPressCounter, 91);
+    lv_obj_set_y(ui_ButtonPressCounter, 88);
     lv_obj_set_align(ui_ButtonPressCounter, LV_ALIGN_CENTER);
     lv_label_set_text(ui_ButtonPressCounter, "0");
     lv_obj_set_style_text_color(ui_ButtonPressCounter, lv_color_hex(0xFF00F2), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -52,8 +69,8 @@ void ui_Home_Scr_screen_init(void)
     ui_radioButton = lv_btn_create(ui_Home_Scr);
     lv_obj_set_width(ui_radioButton, 100);
     lv_obj_set_height(ui_radioButton, 50);
-    lv_obj_set_x(ui_radioButton, -91);
-    lv_obj_set_y(ui_radioButton, -4);
+    lv_obj_set_x(ui_radioButton, -89);
+    lv_obj_set_y(ui_radioButton, 8);
     lv_obj_set_align(ui_radioButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_radioButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_radioButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -67,8 +84,8 @@ void ui_Home_Scr_screen_init(void)
     ui_hvacButton = lv_btn_create(ui_Home_Scr);
     lv_obj_set_width(ui_hvacButton, 100);
     lv_obj_set_height(ui_hvacButton, 50);
-    lv_obj_set_x(ui_hvacButton, 27);
-    lv_obj_set_y(ui_hvacButton, -4);
+    lv_obj_set_x(ui_hvacButton, 37);
+    lv_obj_set_y(ui_hvacButton, 9);
     lv_obj_set_align(ui_hvacButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_hvacButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_hvacButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -82,8 +99,8 @@ void ui_Home_Scr_screen_init(void)
     ui_frontSensorButton = lv_btn_create(ui_Home_Scr);
     lv_obj_set_width(ui_frontSensorButton, 147);
     lv_obj_set_height(ui_frontSensorButton, 50);
-    lv_obj_set_x(ui_frontSensorButton, -31);
-    lv_obj_set_y(ui_frontSensorButton, 63);
+    lv_obj_set_x(ui_frontSensorButton, -30);
+    lv_obj_set_y(ui_frontSensorButton, 71);
     lv_obj_set_align(ui_frontSensorButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_frontSensorButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_frontSensorButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -94,6 +111,25 @@ void ui_Home_Scr_screen_init(void)
     lv_obj_set_align(ui_Label6, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label6, "Front Sensor");
 
+    ui_currentTimeHome = lv_label_create(ui_Home_Scr);
+    lv_obj_set_width(ui_currentTimeHome, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentTimeHome, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentTimeHome, -125);
+    lv_obj_set_y(ui_currentTimeHome, -107);
+    lv_obj_set_align(ui_currentTimeHome, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentTimeHome, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentTimeHome, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_currentDateHome = lv_label_create(ui_Home_Scr);
+    lv_obj_set_width(ui_currentDateHome, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentDateHome, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentDateHome, 116);
+    lv_obj_set_y(ui_currentDateHome, -107);
+    lv_obj_set_align(ui_currentDateHome, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentDateHome, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentDateHome, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_Label1, ui_event_Label1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button3, ui_event_Button3, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_radioButton, ui_event_radioButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_hvacButton, ui_event_hvacButton, LV_EVENT_ALL, NULL);

@@ -7,6 +7,9 @@
 #include <nvs_flash.h>
 #include <stdio.h>
 #include "comms.h"
+#include <esp_sntp.h>
+#include <time.h>
+#include <sys/time.h>
 //#include "wifi_manager.h"
 
 static const char *TAG = "wifi_manager";
@@ -15,6 +18,8 @@ static const char *TAG = "wifi_manager";
 static esp_err_t _wifi_nvs_init(void);
 static void _wifi_event_handler(void *arg, esp_event_base_t event_base,
                                 int32_t event_id, void *event_data);
+static void initialize_sntp(void);
+static void sntp_wait_for_sync(void);
 
 /**************************************************/
 esp_err_t wifi_manager_init_sta(void)
@@ -107,8 +112,33 @@ static void _wifi_event_handler(void *arg, esp_event_base_t event_base,
     else if ((event_base == IP_EVENT) && (event_id == IP_EVENT_STA_GOT_IP)) {
         ip_event_got_ip_t *event = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
-        
-        // *** Notify UI that we are connected ***
+    
+        // Notify UI
         xEventGroupSetBits(xGuiButtonEventGroup, WIFI_CONNECTED_BIT);
+    
+        // Start SNTP sync
+        initialize_sntp();
+        sntp_wait_for_sync();
+    }
+}
+
+static void initialize_sntp(void)
+{
+    sntp_setoperatingmode(SNTP_OPMODE_POLL);
+    sntp_setservername(0, "pool.ntp.org");  // Or your local NTP server
+    sntp_init();
+    ESP_LOGI(TAG, "SNTP initialized");
+}
+
+static void sntp_wait_for_sync(void)
+{
+    for (int i = 0; i < 10; ++i) {
+        if (sntp_get_sync_status() == SNTP_SYNC_STATUS_COMPLETED) {
+            ESP_LOGI(TAG, "Time synchronized.");
+            
+            break;
+        }
+        ESP_LOGI(TAG, "Waiting for time sync... (%d/10)", i+1);
+        vTaskDelay(pdMS_TO_TICKS(2000));
     }
 }

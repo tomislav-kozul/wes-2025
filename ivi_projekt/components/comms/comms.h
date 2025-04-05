@@ -35,11 +35,26 @@ extern "C" {
  * @brief Enums hold gui app events.
  *
  */
-typedef struct
+/*typedef struct
 {
     lv_obj_t *label; // Label name
     int data;              // Integer data to be passed
+} LabelData;*/
+
+typedef enum {
+    LABEL_TYPE_TEXT,
+    LABEL_TYPE_INT
+} LabelType;
+
+typedef struct {
+    lv_obj_t* label;
+    LabelType label_type;
+    union {
+        char text[32];  // For date, time, etc.
+        int value;      // For counters, numeric values
+    } content;
 } LabelData;
+
 
 //------------------------------- GLOBAL DATA ---------------------------------
 extern EventGroupHandle_t xGuiButtonEventGroup;

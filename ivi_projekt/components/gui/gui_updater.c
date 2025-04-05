@@ -39,15 +39,27 @@ static void _gui_updater_task(void *p_parameter) {
 
     for (;;)
     {
-        // Wait for data from the queue
-        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
-            /* Try to take the semaphore, call lvgl related function on success */
-            if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
+        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY))
+        {
+            if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
             {
-                lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
+                switch (receivedData.label_type)
+                {
+                    case LABEL_TYPE_TEXT:
+                        lv_label_set_text(receivedData.label, receivedData.content.text);
+                        break;
+        
+                    case LABEL_TYPE_INT:
+                        lv_label_set_text_fmt(receivedData.label, "%d", receivedData.content.value);
+                        break;
+        
+                    default:
+                        // Optional: handle unknown types
+                        break;
+                }
+        
                 xSemaphoreGive(p_gui_semaphore);
             }
-                
         }
     }
 }

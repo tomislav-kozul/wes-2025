@@ -24,6 +24,9 @@ void ShowBtn_Animation(lv_obj_t * TargetObject, int delay);
 // SCREEN: ui_Home_Scr
 void ui_Home_Scr_screen_init(void);
 extern lv_obj_t * ui_Home_Scr;
+extern lv_obj_t * ui_Button1;
+void ui_event_Label1(lv_event_t * e);
+extern lv_obj_t * ui_Label1;
 void ui_event_Button3(lv_event_t * e);
 extern lv_obj_t * ui_Button3;
 extern lv_obj_t * ui_Label2;
@@ -38,6 +41,8 @@ extern lv_obj_t * ui_Label5;
 void ui_event_frontSensorButton(lv_event_t * e);
 extern lv_obj_t * ui_frontSensorButton;
 extern lv_obj_t * ui_Label6;
+extern lv_obj_t * ui_currentTimeHome;
+extern lv_obj_t * ui_currentDateHome;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;
