@@ -25,12 +25,17 @@ jobs:
           git config --global core.autocrlf input
           git apply ../lvgl_esp32_drivers_8-3.patch
 
-      - name: esp-idf build
-        uses: espressif/esp-idf-ci-action@v1
-        with:
-          esp_idf_version: v5.1
-          target: esp32
-          path: 'ivi_projekt'
+      - name: Install ESP-IDF and dependencies
+        run: |
+          git clone -b v5.0.2 --recursive https://github.com/espressif/esp-idf.git
+          cd esp-idf
+          ./install.sh
+          . ./export.sh
+
+      - name: Firmware build
+        run: |
+          cd ../ivi_projekt
+          idf.py build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
