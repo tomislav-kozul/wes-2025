@@ -24,6 +24,7 @@ jobs:
           cd ivi_projekt/components/lvgl_esp32_drivers
           git config --global core.autocrlf input
           git apply ../lvgl_esp32_drivers_8-3.patch
+          rm components/lock.json
 
       - name: esp-idf build
         uses: espressif/esp-idf-ci-action@v1
