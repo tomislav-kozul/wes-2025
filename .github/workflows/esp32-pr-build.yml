@@ -1,0 +1,29 @@
+name: ESP32 PR Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up ESP-IDF
+        uses: espressif/setup-idf@v1
+        with:
+          version: latest
+
+      - name: Build the project
+        working-directory: ivi_projekt
+        run: idf.py build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-build-artifacts
+          path: ivi_projekt/build/*.bin
