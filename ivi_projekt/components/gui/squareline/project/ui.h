@@ -134,9 +134,9 @@ extern lv_obj_t * ui____initial_actions0;
 LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
 LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
 LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.png
-LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
 LV_IMG_DECLARE(ui_img_seats_driver_240x180_png);    // assets/seats_driver_240x180.png
 LV_IMG_DECLARE(ui_img_seats_pass_240x180_png);    // assets/seats_pass_240x180.png
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
 
 
 

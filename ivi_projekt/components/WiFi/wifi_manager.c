@@ -8,9 +8,10 @@
 #include <stdio.h>
 #include "comms.h"
 #include <esp_sntp.h>
+#include "ui_helpers.h"
 #include <time.h>
 #include <sys/time.h>
-//#include "wifi_manager.h"
+#include "wifi_manager.h"
 
 static const char *TAG = "wifi_manager";
 
@@ -112,9 +113,6 @@ static void _wifi_event_handler(void *arg, esp_event_base_t event_base,
     else if ((event_base == IP_EVENT) && (event_id == IP_EVENT_STA_GOT_IP)) {
         ip_event_got_ip_t *event = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
-    
-        // Notify UI
-        xEventGroupSetBits(xGuiButtonEventGroup, WIFI_CONNECTED_BIT);
     
         // Start SNTP sync
         initialize_sntp();

@@ -12,8 +12,8 @@ SET(SOURCES screens/ui_Home_Scr.c
     images/ui_img_841796653.c
     images/ui_img_hvac_background_280x205_png.c
     images/ui_img_hvac_vents_240x205_png.c
-    images/ui_img_defrost_16x16_png.c
     images/ui_img_seats_driver_240x180_png.c
-    images/ui_img_seats_pass_240x180_png.c)
+    images/ui_img_seats_pass_240x180_png.c
+    images/ui_img_defrost_16x16_png.c)
 
 add_library(ui ${SOURCES})

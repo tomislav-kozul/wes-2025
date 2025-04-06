@@ -74,6 +74,7 @@ typedef struct {
 
 // Global queue handle
 extern QueueHandle_t xAppEventQueue;
+extern QueueHandle_t xGuiUpdateQueue;
 
 // Initialization function
 void comms_init(void);

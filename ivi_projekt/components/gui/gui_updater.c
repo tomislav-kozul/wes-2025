@@ -14,20 +14,14 @@ void gui_updater_init(void)
 static void _gui_updater_task(void *p_parameter)
 {
     AppEvent event;
+    AppEvent eventToRemove;
+    LabelData receivedData;
 
-    for (;;)
-    {
-        // Wait for data from the queue
-        if (xQueueReceive(xGuiUpdateQueue, &receivedData, portMAX_DELAY)) {
-            /* Try to take the semaphore, call lvgl related function on success */
-            if(pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY))
-            {
-                lv_label_set_text_fmt(receivedData.label, "%d", receivedData.data);
-                xSemaphoreGive(p_gui_semaphore);
     for (;;) {
-        if (xQueueReceive(xAppEventQueue, &event, 100 / portTICK_PERIOD_MS)) {
+        if (xQueuePeek(xAppEventQueue, &event, 100 / portTICK_PERIOD_MS)) {
             switch (event.type) {
                 case EVENT_UPDATE_LABEL:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY)) {
                         lv_label_set_text(event.data.update_label.label, event.data.update_label.text);
                         xSemaphoreGive(p_gui_semaphore);
@@ -38,6 +32,7 @@ static void _gui_updater_task(void *p_parameter)
                 case EVENT_FRONT_SENSOR_YELLOW:
                 case EVENT_FRONT_SENSOR_RED:
                 case EVENT_FRONT_SENSOR_NONE:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY)) {
                         lv_obj_set_style_bg_opa(event.data.sensor_alpha.container_red, event.data.sensor_alpha.data_red, LV_PART_MAIN | LV_STATE_DEFAULT);
                         lv_obj_set_style_bg_opa(event.data.sensor_alpha.container_yellow, event.data.sensor_alpha.data_yellow, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -49,6 +44,8 @@ static void _gui_updater_task(void *p_parameter)
                 default:
                     // Ignore unrelated events
                     break;
+            }
+        }
 
         if (xQueueReceive(xGuiUpdateQueue, &receivedData, 100 / portTICK_PERIOD_MS))
         {
@@ -68,9 +65,10 @@ static void _gui_updater_task(void *p_parameter)
                         // Optional: handle unknown types
                         break;
                 }
-        
                 xSemaphoreGive(p_gui_semaphore);
             }
         }
+
+        vTaskDelay(50 / portTICK_PERIOD_MS);
     }
 }

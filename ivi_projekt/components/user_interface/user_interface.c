@@ -79,16 +79,19 @@ void user_interface_init(void)
 static void _user_interface_task(void *p_parameter)
 {
     AppEvent event;
+    AppEvent eventToRemove;
     int labelValue = 0;
 
     for (;;) {
-        if (xQueueReceive(xAppEventQueue, &event, 80 / portTICK_PERIOD_MS)) {
+        if (xQueuePeek(xAppEventQueue, &event, 80 / portTICK_PERIOD_MS)) {
             switch (event.type) {
                 case EVENT_GUI_BUTTON_PRESSED:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     led_toggle(GPIO_LED_BLUE);
                     labelValue++;
                     break;
                 case EVENT_AC_ON_OFF:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     printf("AC_ON_OFF\n");
                     break;
 
@@ -96,11 +99,13 @@ static void _user_interface_task(void *p_parameter)
                 case EVENT_FRONT_SENSOR_YELLOW:
                 case EVENT_FRONT_SENSOR_RED:
                 case EVENT_FRONT_SENSOR_NONE:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     xQueueSend(xAppEventQueue, &event, portMAX_DELAY); // Forward to GUI updater
                     break;
 
                 case EVENT_TEMP_READING:
                 {
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     AppEvent gui_msg = {
                         .type = EVENT_UPDATE_LABEL,
                         .data.update_label = {
@@ -111,8 +116,10 @@ static void _user_interface_task(void *p_parameter)
                     xQueueSend(xAppEventQueue, &gui_msg, portMAX_DELAY);
                     break;
                 }
+
                 case EVENT_TEMP_SET:
                 {
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     AppEvent gui_msg = {
                         .type = EVENT_UPDATE_LABEL,
                         .data.update_label = {
@@ -125,31 +132,12 @@ static void _user_interface_task(void *p_parameter)
                 }
 
                 default:
-                    printf("Unknown event type: %d\n", event.type);
+                    // printf("Unknown event type: %d\n", event.type);
                     break;
-
-        // Blockingly wait on an event.
-        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
-                GUI_APP_EVENT_BUTTON_JEBENI_PRESSED 
-                | GPIO_BUTTON_1_PRESS
-                | GPIO_BUTTON_2_PRESS
-                | GPIO_BUTTON_3_PRESS
-                | GPIO_BUTTON_4_PRESS
-                | WIFI_CONNECTED_BIT,
-                pdTRUE, pdFALSE, portMAX_DELAY)))
-        {
-            // TODO: Probably should check the flags with "&" and "==" operators in case multiple flags are set
-            switch (uxBits)
-            {
-            case WIFI_CONNECTED_BIT:
-                printf("WiFi connected!");
-                //update label
-                break;
-            default:
-                printf("Uknown GUI event\n");
-                break;
             }
         }
+
+        vTaskDelay(50 / portTICK_PERIOD_MS);
     }
 }
 
