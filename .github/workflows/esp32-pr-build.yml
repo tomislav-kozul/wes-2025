@@ -18,6 +18,12 @@ jobs:
         with:
           submodules: 'recursive'
 
+      - name: Apply patch
+        run: |
+          echo "Applying patch..."
+          cd ivi_projekt/components/lvgl_esp32_drivers
+          git apply ../lvgl_esp32_drivers_8-3.patch
+
       - name: esp-idf build
         uses: espressif/esp-idf-ci-action@v1
         with:
