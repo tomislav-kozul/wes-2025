@@ -4,16 +4,13 @@
 #include "freertos/task.h"
 #include "comms.h"
 
-#define UART_STACK_SIZE             (4096)
-
-#define INIT_DELAY 1000
-#define SLEEP_DELAY 1000
+#define UART_STACK_SIZE  (4096)
+#define INIT_DELAY       1000
+#define SLEEP_DELAY      1000
 
 static const char *SENSORS_TAG = "sensors";
 
 char scale = SCALE_CELCIUS;
-float temperature = 0.0;
-float humidity = 0.0;
 
 void _temp_sensor_task(void *arg) {
     i2c_config_t i2c_config = {
@@ -51,7 +48,8 @@ void _temp_sensor_task(void *arg) {
         if(sht3x_read_measurement(&sensors_values) != ESP_OK) {
             ESP_LOGE(SENSORS_TAG, "Sensors read measurement error!");
         }
-        vTaskDelay(INIT_DELAY / portTICK_PERIOD_MS);
+
+        sht3x_stop_periodic_measurement();
 
         float temperature = sensors_values.temperature;
         float humidity = sensors_values.humidity;
@@ -62,16 +60,18 @@ void _temp_sensor_task(void *arg) {
         temperature = KELVIN(temperature);
         #endif
 
-        ESP_LOG_BUFFER_HEX_LEVEL(SENSORS_TAG, &sensors_values, sizeof(sensors_values), ESP_LOG_DEBUG);
-
-        sht3x_stop_periodic_measurement();
-
         ESP_LOGI(SENSORS_TAG, "Temperature %2.1f °%c - Humidity %2.1f%%", temperature, scale, humidity);
-        xQueueSend(xTempReadingQueue, ( void * ) &temperature, portMAX_DELAY);
+
+        AppEvent event = {
+            .type = EVENT_TEMP_READING,
+            .data.temp_reading.temperature = temperature
+        };
+        xQueueSend(xAppEventQueue, &event, portMAX_DELAY);
+
         vTaskDelay(SLEEP_DELAY / portTICK_PERIOD_MS);
     }
 }
 
 void temp_sensor_task_init() {
-    xTaskCreate(_temp_sensor_task, "temp_sensor_task", UART_STACK_SIZE, NULL, configMAX_PRIORITIES-9, NULL);
+    xTaskCreate(_temp_sensor_task, "temp_sensor_task", UART_STACK_SIZE, NULL, configMAX_PRIORITIES - 9, NULL);
 }

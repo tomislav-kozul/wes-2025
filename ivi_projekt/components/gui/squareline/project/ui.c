@@ -78,16 +78,66 @@ lv_obj_t * ui_ACControlScreen;
 void ui_event_Arc1(lv_event_t * e);
 lv_obj_t * ui_Arc1;
 lv_obj_t * ui_SetTemperature;
-void ui_event_Button2(lv_event_t * e);
-lv_obj_t * ui_Button2;
 lv_obj_t * ui_Image2;
 void ui_event_HomeButtonAC(lv_event_t * e);
 lv_obj_t * ui_HomeButtonAC;
 lv_obj_t * ui_temperatureLabelAC;
+void ui_event_RadioButton3(lv_event_t * e);
+lv_obj_t * ui_RadioButton3;
+void ui_event_HVACButton3(lv_event_t * e);
+lv_obj_t * ui_HVACButton3;
+lv_obj_t * ui_SettingsButton3;
+void ui_event_ACButton(lv_event_t * e);
+lv_obj_t * ui_ACButton;
+lv_obj_t * ui_ACButtonLabel;
+
+
+// SCREEN: ui_DriverSeatCtrlScreen
+void ui_DriverSeatCtrlScreen_screen_init(void);
+lv_obj_t * ui_DriverSeatCtrlScreen;
+lv_obj_t * ui_Image1;
+lv_obj_t * ui_DateTimeLabel1;
+void ui_event_HomeButton1(lv_event_t * e);
+lv_obj_t * ui_HomeButton1;
+void ui_event_RadioButton1(lv_event_t * e);
+lv_obj_t * ui_RadioButton1;
+void ui_event_HVACButton1(lv_event_t * e);
+lv_obj_t * ui_HVACButton1;
+lv_obj_t * ui_SettingsButton1;
+lv_obj_t * ui_temperatureLabel1;
+void ui_event_Arc2(lv_event_t * e);
+lv_obj_t * ui_Arc2;
+lv_obj_t * ui_SetTemperature1;
+void ui_event_DriverSeatACButton(lv_event_t * e);
+lv_obj_t * ui_DriverSeatACButton;
+lv_obj_t * ui_DriverSeatACButtonLabel;
+
+
+// SCREEN: ui_PassSeatCtrlScreen
+void ui_PassSeatCtrlScreen_screen_init(void);
+lv_obj_t * ui_PassSeatCtrlScreen;
+lv_obj_t * ui_Image4;
+lv_obj_t * ui_DateTimeLabel2;
+void ui_event_HomeButton2(lv_event_t * e);
+lv_obj_t * ui_HomeButton2;
+void ui_event_RadioButton2(lv_event_t * e);
+lv_obj_t * ui_RadioButton2;
+void ui_event_HVACButton2(lv_event_t * e);
+lv_obj_t * ui_HVACButton2;
+lv_obj_t * ui_SettingsButton2;
+lv_obj_t * ui_temperatureLabel2;
+void ui_event_Arc3(lv_event_t * e);
+lv_obj_t * ui_Arc3;
+lv_obj_t * ui_SetTemperature2;
+void ui_event_PassSeatACButton(lv_event_t * e);
+lv_obj_t * ui_PassSeatACButton;
+lv_obj_t * ui_PassSeatACButtonLabel;
 lv_obj_t * ui____initial_actions0;
 const lv_img_dsc_t * ui_imgset_defrost_x[1] = {&ui_img_defrost_16x16_png};
 const lv_img_dsc_t * ui_imgset_hvac_background_280x[1] = {&ui_img_hvac_background_280x205_png};
 const lv_img_dsc_t * ui_imgset_hvac_vents_240x[1] = {&ui_img_hvac_vents_240x205_png};
+const lv_img_dsc_t * ui_imgset_seats_driver_240x[1] = {&ui_img_seats_driver_240x180_png};
+const lv_img_dsc_t * ui_imgset_seats_pass_240x[1] = {&ui_img_seats_pass_240x180_png};
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -429,7 +479,7 @@ void ui_event_SeatControlButton1(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_ACControlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_ACControlScreen_screen_init);
+        _ui_screen_change(&ui_DriverSeatCtrlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_DriverSeatCtrlScreen_screen_init);
     }
 }
 void ui_event_SeatControlButton2(lv_event_t * e)
@@ -437,7 +487,7 @@ void ui_event_SeatControlButton2(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_ACControlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_ACControlScreen_screen_init);
+        _ui_screen_change(&ui_PassSeatCtrlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_PassSeatCtrlScreen_screen_init);
     }
 }
 void ui_event_ACControlButton(lv_event_t * e)
@@ -453,15 +503,7 @@ void ui_event_Arc1(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        updateSetTemperatureLabel(e);
-    }
-}
-void ui_event_Button2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_state_modify(ui_Button2, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+        updateSetACTemperatureLabel(e);
     }
 }
 void ui_event_HomeButtonAC(lv_event_t * e)
@@ -470,6 +512,111 @@ void ui_event_HomeButtonAC(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_Home_Scr, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Home_Scr_screen_init);
+    }
+}
+void ui_event_RadioButton3(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_RadioScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_RadioScreen_screen_init);
+    }
+}
+void ui_event_HVACButton3(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_HVACScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_HVACScreen_screen_init);
+    }
+}
+void ui_event_ACButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_state_modify(ui_ACButton, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+        ACOnFunction(e);
+    }
+}
+void ui_event_HomeButton1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Home_Scr, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Home_Scr_screen_init);
+    }
+}
+void ui_event_RadioButton1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_RadioScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_RadioScreen_screen_init);
+    }
+}
+void ui_event_HVACButton1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_DriverSeatCtrlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_DriverSeatCtrlScreen_screen_init);
+    }
+}
+void ui_event_Arc2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        updateSetTemperatureLabel(e);
+    }
+}
+void ui_event_DriverSeatACButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_state_modify(ui_DriverSeatACButton, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+    }
+}
+void ui_event_HomeButton2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Home_Scr, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_Home_Scr_screen_init);
+    }
+}
+void ui_event_RadioButton2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_RadioScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_RadioScreen_screen_init);
+    }
+}
+void ui_event_HVACButton2(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_PassSeatCtrlScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_PassSeatCtrlScreen_screen_init);
+    }
+}
+void ui_event_Arc3(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_VALUE_CHANGED) {
+        updateSetTemperatureLabel(e);
+    }
+}
+void ui_event_PassSeatACButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_state_modify(ui_PassSeatACButton, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
     }
 }
 
@@ -486,6 +633,8 @@ void ui_init(void)
     ui_RadioScreen_screen_init();
     ui_HVACScreen_screen_init();
     ui_ACControlScreen_screen_init();
+    ui_DriverSeatCtrlScreen_screen_init();
+    ui_PassSeatCtrlScreen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_Home_Scr);
 }
