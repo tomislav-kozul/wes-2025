@@ -76,19 +76,65 @@ extern lv_obj_t * ui_ACControlScreen;
 void ui_event_Arc1(lv_event_t * e);
 extern lv_obj_t * ui_Arc1;
 extern lv_obj_t * ui_SetTemperature;
-void ui_event_Button2(lv_event_t * e);
-extern lv_obj_t * ui_Button2;
 extern lv_obj_t * ui_Image2;
 void ui_event_HomeButtonAC(lv_event_t * e);
 extern lv_obj_t * ui_HomeButtonAC;
 extern lv_obj_t * ui_temperatureLabelAC;
+void ui_event_RadioButton3(lv_event_t * e);
+extern lv_obj_t * ui_RadioButton3;
+void ui_event_HVACButton3(lv_event_t * e);
+extern lv_obj_t * ui_HVACButton3;
+extern lv_obj_t * ui_SettingsButton3;
+void ui_event_ACButton(lv_event_t * e);
+extern lv_obj_t * ui_ACButton;
+extern lv_obj_t * ui_ACButtonLabel;
+// SCREEN: ui_DriverSeatCtrlScreen
+void ui_DriverSeatCtrlScreen_screen_init(void);
+extern lv_obj_t * ui_DriverSeatCtrlScreen;
+extern lv_obj_t * ui_Image1;
+extern lv_obj_t * ui_DateTimeLabel1;
+void ui_event_HomeButton1(lv_event_t * e);
+extern lv_obj_t * ui_HomeButton1;
+void ui_event_RadioButton1(lv_event_t * e);
+extern lv_obj_t * ui_RadioButton1;
+void ui_event_HVACButton1(lv_event_t * e);
+extern lv_obj_t * ui_HVACButton1;
+extern lv_obj_t * ui_SettingsButton1;
+extern lv_obj_t * ui_temperatureLabel1;
+void ui_event_Arc2(lv_event_t * e);
+extern lv_obj_t * ui_Arc2;
+extern lv_obj_t * ui_SetTemperature1;
+void ui_event_DriverSeatACButton(lv_event_t * e);
+extern lv_obj_t * ui_DriverSeatACButton;
+extern lv_obj_t * ui_DriverSeatACButtonLabel;
+// SCREEN: ui_PassSeatCtrlScreen
+void ui_PassSeatCtrlScreen_screen_init(void);
+extern lv_obj_t * ui_PassSeatCtrlScreen;
+extern lv_obj_t * ui_Image4;
+extern lv_obj_t * ui_DateTimeLabel2;
+void ui_event_HomeButton2(lv_event_t * e);
+extern lv_obj_t * ui_HomeButton2;
+void ui_event_RadioButton2(lv_event_t * e);
+extern lv_obj_t * ui_RadioButton2;
+void ui_event_HVACButton2(lv_event_t * e);
+extern lv_obj_t * ui_HVACButton2;
+extern lv_obj_t * ui_SettingsButton2;
+extern lv_obj_t * ui_temperatureLabel2;
+void ui_event_Arc3(lv_event_t * e);
+extern lv_obj_t * ui_Arc3;
+extern lv_obj_t * ui_SetTemperature2;
+void ui_event_PassSeatACButton(lv_event_t * e);
+extern lv_obj_t * ui_PassSeatACButton;
+extern lv_obj_t * ui_PassSeatACButtonLabel;
 extern lv_obj_t * ui____initial_actions0;
 
 
 LV_IMG_DECLARE(ui_img_841796653);    // assets/car-front-gui.png
 LV_IMG_DECLARE(ui_img_hvac_background_280x205_png);    // assets/hvac_background_280x205.png
-LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
 LV_IMG_DECLARE(ui_img_hvac_vents_240x205_png);    // assets/hvac_vents_240x205.png
+LV_IMG_DECLARE(ui_img_defrost_16x16_png);    // assets/defrost_16x16.png
+LV_IMG_DECLARE(ui_img_seats_driver_240x180_png);    // assets/seats_driver_240x180.png
+LV_IMG_DECLARE(ui_img_seats_pass_240x180_png);    // assets/seats_pass_240x180.png
 
 
 

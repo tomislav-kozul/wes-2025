@@ -1,17 +1,5 @@
-/**
- * @file user_interface.c
- *
- * @brief This file is responsible for complete user interface (LEDs, buttons
- * and GUI).
- *
- * COPYRIGHT NOTICE: (c) 2024 Byte Lab Grupa d.o.o.
- * All rights reserved.
- */
-
-//--------------------------------- INCLUDES ----------------------------------
 #include "user_interface.h"
 #include "gpio_led.h"
-#include "gpio_button.h"
 #include "gui.h"
 #include "ui_helpers.h"
 #include "gui_updater.h"
@@ -23,161 +11,81 @@
 #include "front_sensor.h"
 #include <stdio.h>
 
-//---------------------------------- MACROS -----------------------------------
 #define INIT_DELAY 2000
 
-//-------------------------------- DATA TYPES ---------------------------------
-
-//---------------------- PRIVATE FUNCTION PROTOTYPES --------------------------
-/**
- * @brief User inteface task.
- *
- * @param [in] p_parameter This is the parameter that is passed to the task.
- */
-static void _user_interface_task(void *p_parameter);
-
-//------------------------- STATIC DATA & CONSTANTS ---------------------------
 static TaskHandle_t p_user_interface_task = NULL;
 
-//------------------------------- GLOBAL DATA ---------------------------------
+static void _user_interface_task(void *p_parameter);
 
-//------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
-    //front_sensor_init();
-
     led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
-    button1_init();
-    button2_init();
-    button3_init();
-    //button4_init();
     gui_init();
     gui_updater_init();
-    
+
     vTaskDelay(INIT_DELAY / portTICK_PERIOD_MS);
 
     front_sensor_init();
 
-    // izrada taska koji provjerava red poruka
-    if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task))
-    {
+    if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task)) {
         printf("User interface task was not initialized successfully\n");
         return;
     }
 }
 
-//---------------------------- PRIVATE FUNCTIONS ------------------------------
 static void _user_interface_task(void *p_parameter)
 {
-    EventBits_t uxBits;
+    AppEvent event;
     int labelValue = 0;
-    float receivedTemp = 0.0f;
-    int setTemp = 0;
 
-    for (;;)
-    {
-        // Blockingly wait on an event.
-        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
-                GUI_APP_EVENT_BUTTON_JEBENI_PRESSED 
-                | GPIO_BUTTON_1_PRESS
-                | GPIO_BUTTON_2_PRESS
-                | GPIO_BUTTON_3_PRESS
-                | GPIO_BUTTON_4_PRESS
-                | FRONT_SENSOR_ZONE_GREEN
-                | FRONT_SENSOR_ZONE_YELLOW
-                | FRONT_SENSOR_ZONE_RED
-                | FRONT_SENSOR_ZONE_NONE, 
-            pdTRUE, pdFALSE, 80 / portTICK_PERIOD_MS)))
-        {
-            printf("GUI event received %ld\n", uxBits);
+    for (;;) {
+        if (xQueueReceive(xAppEventQueue, &event, 80 / portTICK_PERIOD_MS)) {
+            switch (event.type) {
+                case EVENT_GUI_BUTTON_PRESSED:
+                    led_toggle(GPIO_LED_BLUE);
+                    labelValue++;
+                    break;
+                case EVENT_AC_ON_OFF:
+                    printf("AC_ON_OFF\n");
+                    break;
 
-            // TODO: Probably should check the flags with "&" and "==" operators in case multiple flags are set
-            switch (uxBits)
-            {
-            case GUI_APP_EVENT_BUTTON_JEBENI_PRESSED:
-                led_toggle(GPIO_LED_BLUE);
-                labelValue++;
+                case EVENT_FRONT_SENSOR_GREEN:
+                case EVENT_FRONT_SENSOR_YELLOW:
+                case EVENT_FRONT_SENSOR_RED:
+                case EVENT_FRONT_SENSOR_NONE:
+                    xQueueSend(xAppEventQueue, &event, portMAX_DELAY); // Forward to GUI updater
+                    break;
 
-                break;
-            case GPIO_BUTTON_1_PRESS:
-                printf("1 - %lu\n", button_press_count[0]);
-                break;
-            case GPIO_BUTTON_2_PRESS:
-                printf("2 - %lu\n", button_press_count[1]);
-                break;
-            case GPIO_BUTTON_3_PRESS:
-                printf("3 - %lu\n", button_press_count[2]);
-                break;
-            case GPIO_BUTTON_4_PRESS:
-                printf("4 - %lu\n", button_press_count[3]);
-                break;
-            case FRONT_SENSOR_ZONE_GREEN:
-                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                sensorAlphaUpdate sensorAlpha1 = {
-                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
-                    50, 50, 255};
-                xQueueSend(xFrontSensorQueue, &sensorAlpha1, portMAX_DELAY);
-                break;
-            case FRONT_SENSOR_ZONE_YELLOW:
-                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                sensorAlphaUpdate sensorAlpha2 = {
-                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
-                    50, 255, 255};
-                xQueueSend(xFrontSensorQueue, &sensorAlpha2, portMAX_DELAY);
-                break;
-            case FRONT_SENSOR_ZONE_RED:
-                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-                sensorAlphaUpdate sensorAlpha3 = {
-                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
-                    255, 255, 255};
-                xQueueSend(xFrontSensorQueue, &sensorAlpha3, portMAX_DELAY);
-                break;
-            case FRONT_SENSOR_ZONE_NONE:
-                //lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorYellowZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                //lv_obj_set_style_bg_opa(ui_frontSensorRedZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
-                sensorAlphaUpdate sensorAlpha4 = {
-                    ui_frontSensorRedZone, ui_frontSensorYellowZone, ui_frontSensorGreenZone,
-                    50, 50, 50};
-                xQueueSend(xFrontSensorQueue, &sensorAlpha4, portMAX_DELAY);
-                break;
-            default:
-                printf("Uknown GUI event\n");
-                break;
+                case EVENT_TEMP_READING:
+                {
+                    AppEvent gui_msg = {
+                        .type = EVENT_UPDATE_LABEL,
+                        .data.update_label = {
+                            .label = ui_temperatureLabel
+                        }
+                    };
+                    snprintf(gui_msg.data.update_label.text, sizeof(gui_msg.data.update_label.text), "%2.1f \u00b0C", event.data.temp_reading.temperature);
+                    xQueueSend(xAppEventQueue, &gui_msg, portMAX_DELAY);
+                    break;
+                }
+                case EVENT_TEMP_SET:
+                {
+                    AppEvent gui_msg = {
+                        .type = EVENT_UPDATE_LABEL,
+                        .data.update_label = {
+                            .label = ui_SetTemperature
+                        }
+                    };
+                    snprintf(gui_msg.data.update_label.text, sizeof(gui_msg.data.update_label.text), "%d \u00b0C", event.data.temp_set.temperature);
+                    xQueueSend(xAppEventQueue, &gui_msg, portMAX_DELAY);
+                    break;
+                }
+
+                default:
+                    printf("Unknown event type: %d\n", event.type);
+                    break;
             }
-        }
-
-        if(xQueueReceive(xTempReadingQueue, &receivedTemp, 20 / portTICK_PERIOD_MS)) {
-            GuiMessage guiMessage = {
-                .command_type = GUI_CMD_UPDATE_LABEL,
-                .update_label = {
-                    .label = ui_temperatureLabel,
-                    .text = ""
-                }
-            };
-            snprintf(guiMessage.update_label.text, sizeof(guiMessage.update_label.text), "%2.1f °C", receivedTemp);
-            xQueueSend(xGuiUpdateQueue, &guiMessage, portMAX_DELAY);
-        }
-
-        if(xQueueReceive(xTempSetQueue, &setTemp, 20 / portTICK_PERIOD_MS)) {
-            GuiMessage guiMessage = {
-                .command_type = GUI_CMD_UPDATE_LABEL,
-                .update_label = {
-                    .label = ui_SetTemperature,
-                    .text = ""
-                }
-            };
-            snprintf(guiMessage.update_label.text, sizeof(guiMessage.update_label.text), "%d °C", setTemp);
-            xQueueSend(xGuiUpdateQueue, &guiMessage, portMAX_DELAY);
         }
     }
 }
-
-//---------------------------- INTERRUPT HANDLERS -----------------------------
