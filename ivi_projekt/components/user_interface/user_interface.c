@@ -3,6 +3,7 @@
 #include "gui.h"
 #include "ui_helpers.h"
 #include "gui_updater.h"
+#include "speaker.h"
 #include "comms.h"
 #include "pins.h"
 #include "freertos/FreeRTOS.h"
@@ -27,6 +28,7 @@ void user_interface_init(void)
     vTaskDelay(INIT_DELAY / portTICK_PERIOD_MS);
 
     front_sensor_init();
+    init_speaker();
 
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task)) {
         printf("User interface task was not initialized successfully\n");
