@@ -34,7 +34,8 @@ jobs:
 
       - name: Firmware build
         run: |
-          cd ../ivi_projekt
+          pwd
+          cd ../../ivi_projekt
           idf.py build
 
       - name: Upload build artifacts
