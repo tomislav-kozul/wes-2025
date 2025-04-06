@@ -1,0 +1,43 @@
+name: ESP32 PR Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Apply patch
+        run: |
+          echo "Applying patch..."
+          cd ivi_projekt/components/lvgl_esp32_drivers
+          git config --global core.autocrlf input
+          git apply ../lvgl_esp32_drivers_8-3.patch
+
+      - name: Install ESP-IDF and dependencies and build
+        run: |
+          git clone -b v5.0.2 --recursive https://github.com/espressif/esp-idf.git
+          cd esp-idf
+          ./install.sh
+          . ./export.sh
+          pwd
+          cd ../ivi_projekt
+          pwd
+          idf.py build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-build-artifacts
+          path: ivi_projekt/build/*.bin

@@ -24,9 +24,14 @@ typedef enum {
     EVENT_FRONT_SENSOR_RED,
     EVENT_FRONT_SENSOR_NONE,
     EVENT_TEMP_READING,
-    EVENT_TEMP_SET,
+    EVENT_AC_TEMP_SET,
     EVENT_UPDATE_LABEL,
-    EVENT_UPDATE_SENSOR_ALPHA
+    EVENT_UPDATE_SENSOR_ALPHA,
+    EVENT_AC_TEMP_UPDATE,
+    EVENT_AMBIENT_TEMP_UPDATE,
+    HVAC_AC_TEMP_UPDATE,
+    HVAC_AC_ON_OFF,
+    HVAC_AMBIENT_TEMP_UPDATE
 } AppEventType;
 
 // Unified event structure
@@ -57,8 +62,24 @@ typedef struct {
     } data;
 } AppEvent;
 
+//-------------------------------- DATA TYPES ---------------------------------
+typedef enum {
+    LABEL_TYPE_TEXT,
+    LABEL_TYPE_INT
+} LabelType;
+
+typedef struct {
+    lv_obj_t* label;
+    LabelType label_type;
+    union {
+        char text[32];  // For date, time, etc.
+        int value;      // For counters, numeric values
+    } content;
+} LabelData;
+
 // Global queue handle
 extern QueueHandle_t xAppEventQueue;
+extern QueueHandle_t xGuiUpdateQueue;
 
 // Initialization function
 void comms_init(void);
