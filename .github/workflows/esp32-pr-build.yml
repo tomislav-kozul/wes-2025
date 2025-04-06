@@ -13,14 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up ESP-IDF
-        uses: espressif/setup-idf@v1.3.1
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
-          version: latest
+          submodules: 'recursive'
 
-      - name: Build the project
-        working-directory: ivi_projekt
-        run: idf.py build
+      - name: esp-idf build
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.0.2
+          target: esp32
+          path: 'ivi_projekt'
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
