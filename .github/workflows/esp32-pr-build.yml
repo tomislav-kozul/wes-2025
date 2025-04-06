@@ -25,17 +25,15 @@ jobs:
           git config --global core.autocrlf input
           git apply ../lvgl_esp32_drivers_8-3.patch
 
-      - name: Install ESP-IDF and dependencies
+      - name: Install ESP-IDF and dependencies and build
         run: |
           git clone -b v5.0.2 --recursive https://github.com/espressif/esp-idf.git
           cd esp-idf
           ./install.sh
           . ./export.sh
-
-      - name: Firmware build
-        run: |
           pwd
-          cd ivi_projekt
+          cd ../ivi_projekt
+          pwd
           idf.py build
 
       - name: Upload build artifacts
