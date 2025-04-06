@@ -22,6 +22,7 @@ jobs:
         run: |
           echo "Applying patch..."
           cd ivi_projekt/components/lvgl_esp32_drivers
+          git config --global core.autocrlf input
           git apply ../lvgl_esp32_drivers_8-3.patch
 
       - name: esp-idf build
