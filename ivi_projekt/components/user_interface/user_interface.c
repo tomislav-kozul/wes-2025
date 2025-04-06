@@ -179,15 +179,29 @@ static void vTimeUpdateCallback(TimerHandle_t xTimer)
         .label_type = LABEL_TYPE_TEXT
     };
     snprintf(timeLabel.content.text, sizeof(timeLabel.content.text), "%s", time_str);
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    timeLabel.label = ui_currentTimePark;
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    timeLabel.label = ui_currentTimeRadio;
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    timeLabel.label = ui_currentTimeHVAC;
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    timeLabel.label = ui_currentTimeAC;
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
 
     LabelData dateLabel = {
         .label = ui_currentDateHome,
         .label_type = LABEL_TYPE_TEXT
     };
     snprintf(dateLabel.content.text, sizeof(dateLabel.content.text), "%s", date_str);
-
-    // Send the updated labels to the GUI update queue
-    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
+    dateLabel.label = ui_currentDatePark;
+    xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
+    dateLabel.label = ui_currentDateRadio;
+    xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
+    dateLabel.label = ui_currentDateHVAC;
+    xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
+    dateLabel.label = ui_currentDateAC;
     xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
 }
 
