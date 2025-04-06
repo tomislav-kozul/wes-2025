@@ -21,11 +21,6 @@ lv_obj_t * ui_Home_Scr;
 lv_obj_t * ui_Button1;
 void ui_event_Label1(lv_event_t * e);
 lv_obj_t * ui_Label1;
-void ui_event_Button3(lv_event_t * e);
-lv_obj_t * ui_Button3;
-lv_obj_t * ui_Label2;
-lv_obj_t * ui_Label3;
-lv_obj_t * ui_ButtonPressCounter;
 void ui_event_radioButton(lv_event_t * e);
 lv_obj_t * ui_radioButton;
 lv_obj_t * ui_Label4;
@@ -79,7 +74,7 @@ void ui_ACControlScreen_screen_init(void);
 lv_obj_t * ui_ACControlScreen;
 void ui_event_Arc1(lv_event_t * e);
 lv_obj_t * ui_Arc1;
-lv_obj_t * ui_SetTemperature;
+lv_obj_t * ui_SetTemperatureLabel;
 lv_obj_t * ui_Image2;
 void ui_event_HomeButtonAC(lv_event_t * e);
 lv_obj_t * ui_HomeButtonAC;
@@ -420,14 +415,6 @@ void ui_event_Label1(lv_event_t * e)
         btn_clicked(e);
     }
 }
-void ui_event_Button3(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_PRESSED) {
-        jebena_funkcija(e);
-    }
-}
 void ui_event_radioButton(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -505,7 +492,7 @@ void ui_event_Arc1(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_VALUE_CHANGED) {
-        updateSetACTemperatureLabel(e);
+        ACTemperatureSet(e);
     }
 }
 void ui_event_HomeButtonAC(lv_event_t * e)
@@ -538,6 +525,7 @@ void ui_event_ACButton(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_state_modify(ui_ACButton, LV_STATE_CHECKED, _UI_MODIFY_STATE_TOGGLE);
+        ACOnFunction(e);
     }
 }
 void ui_event_HomeButton1(lv_event_t * e)

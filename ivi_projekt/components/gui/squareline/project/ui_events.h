@@ -11,8 +11,8 @@ extern "C" {
 #endif
 
 void btn_clicked(lv_event_t * e);
-void jebena_funkcija(lv_event_t * e);
-void updateSetACTemperatureLabel(lv_event_t * e);
+void ACTemperatureSet(lv_event_t * e);
+void ACOnFunction(lv_event_t * e);
 void updateSetTemperatureLabel(lv_event_t * e);
 
 #ifdef __cplusplus

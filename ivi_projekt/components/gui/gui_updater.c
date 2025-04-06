@@ -1,4 +1,5 @@
 #include "comms.h"
+#include "ui_helpers.h"
 #include "gui.h"
 #include <stdio.h>
 
@@ -16,6 +17,8 @@ static void _gui_updater_task(void *p_parameter)
     AppEvent event;
     AppEvent eventToRemove;
     LabelData receivedData;
+    char labelText[64];
+
 
     for (;;) {
         if (xQueuePeek(xAppEventQueue, &event, 100 / portTICK_PERIOD_MS)) {
@@ -37,6 +40,24 @@ static void _gui_updater_task(void *p_parameter)
                         lv_obj_set_style_bg_opa(event.data.sensor_alpha.container_red, event.data.sensor_alpha.data_red, LV_PART_MAIN | LV_STATE_DEFAULT);
                         lv_obj_set_style_bg_opa(event.data.sensor_alpha.container_yellow, event.data.sensor_alpha.data_yellow, LV_PART_MAIN | LV_STATE_DEFAULT);
                         lv_obj_set_style_bg_opa(event.data.sensor_alpha.container_green, event.data.sensor_alpha.data_green, LV_PART_MAIN | LV_STATE_DEFAULT);
+                        xSemaphoreGive(p_gui_semaphore);
+                    }
+                    break;
+
+                case EVENT_AC_TEMP_UPDATE:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
+                    if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY)) {
+                        snprintf(labelText, sizeof(labelText), "%d \u00b0C", event.data.temp_set.temperature);
+                        lv_label_set_text(ui_SetTemperatureLabel, labelText);
+                        xSemaphoreGive(p_gui_semaphore);
+                    }
+                    break;
+
+                case EVENT_AMBIENT_TEMP_UPDATE:
+                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
+                    if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY)) {
+                        snprintf(labelText, sizeof(labelText), "%2.1f \u00b0C", event.data.temp_reading.temperature);
+                        lv_label_set_text(ui_temperatureLabelAC, labelText);
                         xSemaphoreGive(p_gui_semaphore);
                     }
                     break;

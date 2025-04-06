@@ -19,6 +19,7 @@
 #include "gui.h"
 #include "user_interface.h"
 #include "comms.h"
+#include "hvac.h"
 #include "temperature_sensor.h"
 #include "wifi_manager.h"
 
@@ -62,6 +63,7 @@ void app_main(void)
 {
     comms_init();
     user_interface_init();
+    hvac_task_init();
     temp_sensor_task_init();
     wifi_manager_init_sta();
     wifi_manager_connect(ESP_WIFI_SSID, ESP_WIFI_PASS);

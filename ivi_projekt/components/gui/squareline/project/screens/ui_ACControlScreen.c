@@ -24,18 +24,18 @@ void ui_ACControlScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_Arc1, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Arc1, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
 
-    ui_SetTemperature = lv_label_create(ui_Arc1);
-    lv_obj_set_width(ui_SetTemperature, LV_SIZE_CONTENT);   /// 2
-    lv_obj_set_height(ui_SetTemperature, LV_SIZE_CONTENT);    /// 2
-    lv_obj_set_x(ui_SetTemperature, 1);
-    lv_obj_set_y(ui_SetTemperature, -4);
-    lv_obj_set_align(ui_SetTemperature, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SetTemperature, "24 °C");
-    lv_obj_set_style_text_color(ui_SetTemperature, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SetTemperature, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_letter_space(ui_SetTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_line_space(ui_SetTemperature, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SetTemperature, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SetTemperatureLabel = lv_label_create(ui_Arc1);
+    lv_obj_set_width(ui_SetTemperatureLabel, LV_SIZE_CONTENT);   /// 2
+    lv_obj_set_height(ui_SetTemperatureLabel, LV_SIZE_CONTENT);    /// 2
+    lv_obj_set_x(ui_SetTemperatureLabel, 1);
+    lv_obj_set_y(ui_SetTemperatureLabel, -4);
+    lv_obj_set_align(ui_SetTemperatureLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SetTemperatureLabel, "24 °C");
+    lv_obj_set_style_text_color(ui_SetTemperatureLabel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SetTemperatureLabel, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui_SetTemperatureLabel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_line_space(ui_SetTemperatureLabel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SetTemperatureLabel, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Image2 = lv_img_create(ui_ACControlScreen);
     lv_img_set_src(ui_Image2, &ui_img_hvac_vents_240x205_png);

@@ -50,6 +50,11 @@ void led_on(uint8_t pin)
     gpio_set_level(pin, 1U);
 }
 
+void led_off(uint8_t pin)
+{
+    gpio_set_level(pin, 0U);
+}
+
 void led_toggle(uint8_t pin)
 {
     uint32_t level = 0;

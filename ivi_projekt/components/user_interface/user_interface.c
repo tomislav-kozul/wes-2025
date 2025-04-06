@@ -80,21 +80,18 @@ static void _user_interface_task(void *p_parameter)
 {
     AppEvent event;
     AppEvent eventToRemove;
-    int labelValue = 0;
 
     for (;;) {
         if (xQueuePeek(xAppEventQueue, &event, 80 / portTICK_PERIOD_MS)) {
             switch (event.type) {
-                case EVENT_GUI_BUTTON_PRESSED:
-                    xQueueReceive(xAppEventQueue, &eventToRemove, 0);
-                    led_toggle(GPIO_LED_BLUE);
-                    labelValue++;
-                    break;
                 case EVENT_AC_ON_OFF:
                     xQueueReceive(xAppEventQueue, &eventToRemove, 0);
-                    printf("AC_ON_OFF\n");
+                    AppEvent hvac_msg = {
+                        .type = HVAC_AC_ON_OFF,
+                        .data = {},
+                    };
+                    xQueueSend(xAppEventQueue, &hvac_msg, portMAX_DELAY);
                     break;
-
                 case EVENT_FRONT_SENSOR_GREEN:
                 case EVENT_FRONT_SENSOR_YELLOW:
                 case EVENT_FRONT_SENSOR_RED:
@@ -107,27 +104,39 @@ static void _user_interface_task(void *p_parameter)
                 {
                     xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     AppEvent gui_msg = {
-                        .type = EVENT_UPDATE_LABEL,
-                        .data.update_label = {
-                            .label = ui_temperatureLabel
+                        .type = EVENT_AMBIENT_TEMP_UPDATE,
+                        .data.temp_reading = {
+                            .temperature = event.data.temp_reading.temperature
                         }
                     };
-                    snprintf(gui_msg.data.update_label.text, sizeof(gui_msg.data.update_label.text), "%2.1f \u00b0C", event.data.temp_reading.temperature);
                     xQueueSend(xAppEventQueue, &gui_msg, portMAX_DELAY);
+                    AppEvent hvac_msg = {
+                        .type = HVAC_AMBIENT_TEMP_UPDATE,
+                        .data.temp_reading = {
+                            .temperature = event.data.temp_reading.temperature
+                        }
+                    };
+                    xQueueSend(xAppEventQueue, &hvac_msg, portMAX_DELAY);
                     break;
                 }
 
-                case EVENT_TEMP_SET:
+                case EVENT_AC_TEMP_SET:
                 {
                     xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     AppEvent gui_msg = {
-                        .type = EVENT_UPDATE_LABEL,
-                        .data.update_label = {
-                            .label = ui_SetTemperature
+                        .type = EVENT_AC_TEMP_UPDATE,
+                        .data.temp_set = {
+                            .temperature = event.data.temp_set.temperature
                         }
                     };
-                    snprintf(gui_msg.data.update_label.text, sizeof(gui_msg.data.update_label.text), "%d \u00b0C", event.data.temp_set.temperature);
                     xQueueSend(xAppEventQueue, &gui_msg, portMAX_DELAY);
+                    AppEvent hvac_msg = {
+                        .type = HVAC_AC_TEMP_UPDATE,
+                        .data.temp_set = {
+                            .temperature = event.data.temp_set.temperature
+                        }
+                    };
+                    xQueueSend(xAppEventQueue, &hvac_msg, portMAX_DELAY);
                     break;
                 }
 
