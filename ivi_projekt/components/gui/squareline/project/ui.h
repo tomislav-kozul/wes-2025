@@ -41,6 +41,8 @@ extern lv_obj_t * ui_Label5;
 void ui_event_frontSensorButton(lv_event_t * e);
 extern lv_obj_t * ui_frontSensorButton;
 extern lv_obj_t * ui_Label6;
+extern lv_obj_t * ui_currentTimeHome;
+extern lv_obj_t * ui_currentDateHome;
 // SCREEN: ui_FrontSensorScreen
 void ui_FrontSensorScreen_screen_init(void);
 extern lv_obj_t * ui_FrontSensorScreen;

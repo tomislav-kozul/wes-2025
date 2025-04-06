@@ -57,6 +57,21 @@ typedef struct {
     } data;
 } AppEvent;
 
+//-------------------------------- DATA TYPES ---------------------------------
+typedef enum {
+    LABEL_TYPE_TEXT,
+    LABEL_TYPE_INT
+} LabelType;
+
+typedef struct {
+    lv_obj_t* label;
+    LabelType label_type;
+    union {
+        char text[32];  // For date, time, etc.
+        int value;      // For counters, numeric values
+    } content;
+} LabelData;
+
 // Global queue handle
 extern QueueHandle_t xAppEventQueue;
 

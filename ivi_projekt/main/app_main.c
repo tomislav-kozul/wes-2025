@@ -20,6 +20,7 @@
 #include "user_interface.h"
 #include "comms.h"
 #include "temperature_sensor.h"
+#include "wifi_manager.h"
 
 //----------------------------------- PINS ------------------------------------
 
@@ -38,8 +39,8 @@
 
 #define QUEUE_LENGTH        (10U) // default veličina reda poruka
 
-#define ESP_WIFI_SSID       (" ")
-#define ESP_WIFI_PASS       (" ")
+#define ESP_WIFI_SSID       ("S24")
+#define ESP_WIFI_PASS       ("pass1234!")
 #define ESP_WIFI_CHANNEL    (1U)
 #define MAX_STA_CONN        (4U)
 
@@ -62,4 +63,7 @@ void app_main(void)
     comms_init();
     user_interface_init();
     temp_sensor_task_init();
+    wifi_manager_init_sta();
+    wifi_manager_connect(ESP_WIFI_SSID, ESP_WIFI_PASS);
+    
 }

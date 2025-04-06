@@ -10,20 +10,33 @@
 #include "freertos/queue.h"
 #include "front_sensor.h"
 #include <stdio.h>
+#include "freertos/timers.h"
+
+#include "stdio.h"
+#include "time.h"
+#include "sys/time.h"
 
 #define INIT_DELAY 2000
 
 static TaskHandle_t p_user_interface_task = NULL;
 
 static void _user_interface_task(void *p_parameter);
+static void vTimeUpdateCallback(TimerHandle_t xTimer);
+//static void _time_display_task(void *p_parameter);
 
+//------------------------- STATIC DATA & CONSTANTS ---------------------------
+static TimerHandle_t timeUpdateTimer = NULL;
+static bool isFirstExecution = true;
+//------------------------------- GLOBAL DATA ---------------------------------
+
+//------------------------------ PUBLIC FUNCTIONS -----------------------------
 void user_interface_init(void)
 {
     led_toggle_state_init();
     led_init(GPIO_LED_BLUE);
     gui_init();
     gui_updater_init();
-
+    
     vTaskDelay(INIT_DELAY / portTICK_PERIOD_MS);
 
     front_sensor_init();
@@ -31,6 +44,35 @@ void user_interface_init(void)
     if (pdPASS != xTaskCreate(&_user_interface_task, "user_interface_task", 2 * 1024, NULL, 5, &p_user_interface_task)) {
         printf("User interface task was not initialized successfully\n");
         return;
+    }
+
+    // timezone to Central European (adjust as needed)
+    setenv("TZ", "CET-1CEST-2,M3.5.0/02:00:00,M10.5.0/03:00:00", 1);
+    tzset();
+
+    timeUpdateTimer = xTimerCreate(
+    "TimeUpdateTimer",            // Timer name
+    pdMS_TO_TICKS(1000),          // Timer period in ticks (1 second at first, then change to 60s in timer
+    pdTRUE,                       // Auto-reload set to true
+    (void *)0,                    // Timer ID
+    vTimeUpdateCallback           // Callback function
+    );
+
+    // Check if timer was created successfully
+    if (timeUpdateTimer == NULL)
+    {
+        printf("Timer not created\n");
+    }
+    else
+    {
+        if (xTimerStart(timeUpdateTimer, 0) == pdPASS)
+        {
+            printf("Timer started successfully!\n");
+        }
+        else
+        {
+            printf("Failed to start timer\n");
+        }
     }
 }
 
@@ -85,7 +127,70 @@ static void _user_interface_task(void *p_parameter)
                 default:
                     printf("Unknown event type: %d\n", event.type);
                     break;
+
+        // Blockingly wait on an event.
+        if ((xGuiButtonEventGroup != NULL) && (uxBits = xEventGroupWaitBits(xGuiButtonEventGroup, 
+                GUI_APP_EVENT_BUTTON_JEBENI_PRESSED 
+                | GPIO_BUTTON_1_PRESS
+                | GPIO_BUTTON_2_PRESS
+                | GPIO_BUTTON_3_PRESS
+                | GPIO_BUTTON_4_PRESS
+                | WIFI_CONNECTED_BIT,
+                pdTRUE, pdFALSE, portMAX_DELAY)))
+        {
+            // TODO: Probably should check the flags with "&" and "==" operators in case multiple flags are set
+            switch (uxBits)
+            {
+            case WIFI_CONNECTED_BIT:
+                printf("WiFi connected!");
+                //update label
+                break;
+            default:
+                printf("Uknown GUI event\n");
+                break;
             }
         }
     }
 }
+
+//---------------------------- INTERRUPT HANDLERS -----------------------------
+
+static void vTimeUpdateCallback(TimerHandle_t xTimer)
+{
+
+    //change timer interrupt time
+    if(isFirstExecution){
+        xTimerChangePeriod(xTimer, pdMS_TO_TICKS(60000), 100 == pdPASS);
+        isFirstExecution = false;
+    }
+    // Obtain the current time
+    time_t now;
+    struct tm timeinfo;
+    char time_str[16];
+    char date_str[16];
+
+    time(&now);
+    localtime_r(&now, &timeinfo);
+
+    // Format the time and date strings
+    strftime(time_str, sizeof(time_str), "%H:%M", &timeinfo);
+    strftime(date_str, sizeof(date_str), "%Y-%m-%d", &timeinfo);
+
+    // Create LabelData structures for time and date
+    LabelData timeLabel = {
+        .label = ui_currentTimeHome,
+        .label_type = LABEL_TYPE_TEXT
+    };
+    snprintf(timeLabel.content.text, sizeof(timeLabel.content.text), "%s", time_str);
+
+    LabelData dateLabel = {
+        .label = ui_currentDateHome,
+        .label_type = LABEL_TYPE_TEXT
+    };
+    snprintf(dateLabel.content.text, sizeof(dateLabel.content.text), "%s", date_str);
+
+    // Send the updated labels to the GUI update queue
+    xQueueSend(xGuiUpdateQueue, &timeLabel, portMAX_DELAY);
+    xQueueSend(xGuiUpdateQueue, &dateLabel, portMAX_DELAY);
+}
+
