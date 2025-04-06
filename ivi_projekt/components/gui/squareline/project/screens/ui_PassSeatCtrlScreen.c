@@ -9,8 +9,8 @@ void ui_PassSeatCtrlScreen_screen_init(void)
 {
     ui_PassSeatCtrlScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_PassSeatCtrlScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_PassSeatCtrlScreen, lv_color_hex(0x9E9FA1), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_PassSeatCtrlScreen, 125, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_PassSeatCtrlScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_PassSeatCtrlScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_img_opa(ui_PassSeatCtrlScreen, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui_PassSeatCtrlScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_PassSeatCtrlScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -75,18 +75,6 @@ void ui_PassSeatCtrlScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_HVACButton2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_HVACButton2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsButton2 = lv_btn_create(ui_PassSeatCtrlScreen);
-    lv_obj_set_width(ui_SettingsButton2, 40);
-    lv_obj_set_height(ui_SettingsButton2, 40);
-    lv_obj_set_x(ui_SettingsButton2, -136);
-    lv_obj_set_y(ui_SettingsButton2, 77);
-    lv_obj_set_align(ui_SettingsButton2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsButton2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsButton2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(ui_SettingsButton2, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_SettingsButton2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SettingsButton2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_temperatureLabel2 = lv_label_create(ui_PassSeatCtrlScreen);
     lv_obj_set_width(ui_temperatureLabel2, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_temperatureLabel2, LV_SIZE_CONTENT);    /// 1
@@ -98,56 +86,8 @@ void ui_PassSeatCtrlScreen_screen_init(void)
     lv_obj_set_style_text_opa(ui_temperatureLabel2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_align(ui_temperatureLabel2, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Arc3 = lv_arc_create(ui_PassSeatCtrlScreen);
-    lv_obj_set_width(ui_Arc3, 125);
-    lv_obj_set_height(ui_Arc3, 125);
-    lv_obj_set_x(ui_Arc3, 17);
-    lv_obj_set_y(ui_Arc3, 20);
-    lv_obj_set_align(ui_Arc3, LV_ALIGN_CENTER);
-    lv_arc_set_range(ui_Arc3, 16, 32);
-    lv_arc_set_value(ui_Arc3, 24);
-
-    lv_obj_set_style_bg_color(ui_Arc3, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Arc3, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
-
-    ui_SetTemperature2 = lv_label_create(ui_Arc3);
-    lv_obj_set_width(ui_SetTemperature2, LV_SIZE_CONTENT);   /// 2
-    lv_obj_set_height(ui_SetTemperature2, LV_SIZE_CONTENT);    /// 2
-    lv_obj_set_x(ui_SetTemperature2, 1);
-    lv_obj_set_y(ui_SetTemperature2, -4);
-    lv_obj_set_align(ui_SetTemperature2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SetTemperature2, "24 °C");
-    lv_obj_set_style_text_color(ui_SetTemperature2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SetTemperature2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_letter_space(ui_SetTemperature2, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_line_space(ui_SetTemperature2, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SetTemperature2, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_PassSeatACButton = lv_btn_create(ui_PassSeatCtrlScreen);
-    lv_obj_set_width(ui_PassSeatACButton, 45);
-    lv_obj_set_height(ui_PassSeatACButton, 45);
-    lv_obj_set_x(ui_PassSeatACButton, 18);
-    lv_obj_set_y(ui_PassSeatACButton, 81);
-    lv_obj_set_align(ui_PassSeatACButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_PassSeatACButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_PassSeatACButton, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_PassSeatACButton, lv_color_hex(0xA1A1A1), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_PassSeatACButton, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_color(ui_PassSeatACButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_opa(ui_PassSeatACButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_PassSeatACButton, lv_color_hex(0x3F93C6), LV_PART_MAIN | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_opa(ui_PassSeatACButton, 255, LV_PART_MAIN | LV_STATE_CHECKED);
-
-    ui_PassSeatACButtonLabel = lv_label_create(ui_PassSeatACButton);
-    lv_obj_set_width(ui_PassSeatACButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_PassSeatACButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_PassSeatACButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_PassSeatACButtonLabel, "AC");
-
     lv_obj_add_event_cb(ui_HomeButton2, ui_event_HomeButton2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_RadioButton2, ui_event_RadioButton2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HVACButton2, ui_event_HVACButton2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Arc3, ui_event_Arc3, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_PassSeatACButton, ui_event_PassSeatACButton, LV_EVENT_ALL, NULL);
 
 }

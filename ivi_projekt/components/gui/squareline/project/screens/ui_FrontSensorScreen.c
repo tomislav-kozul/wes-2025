@@ -9,15 +9,15 @@ void ui_FrontSensorScreen_screen_init(void)
 {
     ui_FrontSensorScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_FrontSensorScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_FrontSensorScreen, lv_color_hex(0x3E3E3E), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_FrontSensorScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_FrontSensorScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_frontSensorCarImage = lv_img_create(ui_FrontSensorScreen);
     lv_img_set_src(ui_frontSensorCarImage, &ui_img_841796653);
     lv_obj_set_width(ui_frontSensorCarImage, LV_SIZE_CONTENT);   /// 250
     lv_obj_set_height(ui_frontSensorCarImage, LV_SIZE_CONTENT);    /// 444
-    lv_obj_set_x(ui_frontSensorCarImage, 23);
-    lv_obj_set_y(ui_frontSensorCarImage, 161);
+    lv_obj_set_x(ui_frontSensorCarImage, 50);
+    lv_obj_set_y(ui_frontSensorCarImage, 182);
     lv_obj_set_align(ui_frontSensorCarImage, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_frontSensorCarImage, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_frontSensorCarImage, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
@@ -26,8 +26,8 @@ void ui_FrontSensorScreen_screen_init(void)
     lv_obj_remove_style_all(ui_frontSensorRedZone);
     lv_obj_set_width(ui_frontSensorRedZone, 100);
     lv_obj_set_height(ui_frontSensorRedZone, 20);
-    lv_obj_set_x(ui_frontSensorRedZone, 0);
-    lv_obj_set_y(ui_frontSensorRedZone, -23);
+    lv_obj_set_x(ui_frontSensorRedZone, 28);
+    lv_obj_set_y(ui_frontSensorRedZone, 0);
     lv_obj_set_align(ui_frontSensorRedZone, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_frontSensorRedZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_frontSensorRedZone, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -37,8 +37,8 @@ void ui_FrontSensorScreen_screen_init(void)
     lv_obj_remove_style_all(ui_frontSensorYellowZone);
     lv_obj_set_width(ui_frontSensorYellowZone, 100);
     lv_obj_set_height(ui_frontSensorYellowZone, 20);
-    lv_obj_set_x(ui_frontSensorYellowZone, 0);
-    lv_obj_set_y(ui_frontSensorYellowZone, -55);
+    lv_obj_set_x(ui_frontSensorYellowZone, 28);
+    lv_obj_set_y(ui_frontSensorYellowZone, -29);
     lv_obj_set_align(ui_frontSensorYellowZone, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_frontSensorYellowZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_frontSensorYellowZone, lv_color_hex(0xFFF100), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -48,12 +48,110 @@ void ui_FrontSensorScreen_screen_init(void)
     lv_obj_remove_style_all(ui_frontSensorGreenZone);
     lv_obj_set_width(ui_frontSensorGreenZone, 100);
     lv_obj_set_height(ui_frontSensorGreenZone, 20);
-    lv_obj_set_x(ui_frontSensorGreenZone, 0);
-    lv_obj_set_y(ui_frontSensorGreenZone, -88);
+    lv_obj_set_x(ui_frontSensorGreenZone, 28);
+    lv_obj_set_y(ui_frontSensorGreenZone, -62);
     lv_obj_set_align(ui_frontSensorGreenZone, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_frontSensorGreenZone, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_frontSensorGreenZone, lv_color_hex(0x09FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_frontSensorGreenZone, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_HomeButtonPark = lv_btn_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_HomeButtonPark, 50);
+    lv_obj_set_height(ui_HomeButtonPark, 50);
+    lv_obj_set_x(ui_HomeButtonPark, -135);
+    lv_obj_set_y(ui_HomeButtonPark, -57);
+    lv_obj_set_align(ui_HomeButtonPark, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HomeButtonPark, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HomeButtonPark, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HomeButtonPark, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HomeButtonPark, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HomeButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_HomeButtonPark, &ui_img_home32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_HomeButtonPark, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_HomeButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_HomeButtonPark, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_RadioButtonPark = lv_btn_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_RadioButtonPark, 50);
+    lv_obj_set_height(ui_RadioButtonPark, 50);
+    lv_obj_set_x(ui_RadioButtonPark, -135);
+    lv_obj_set_y(ui_RadioButtonPark, -6);
+    lv_obj_set_align(ui_RadioButtonPark, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_RadioButtonPark, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_RadioButtonPark, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_RadioButtonPark, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_RadioButtonPark, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_RadioButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_RadioButtonPark, &ui_img_radio32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_RadioButtonPark, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_RadioButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_RadioButtonPark, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HVACButtonPark = lv_btn_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_HVACButtonPark, 50);
+    lv_obj_set_height(ui_HVACButtonPark, 50);
+    lv_obj_set_x(ui_HVACButtonPark, -135);
+    lv_obj_set_y(ui_HVACButtonPark, 44);
+    lv_obj_set_align(ui_HVACButtonPark, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HVACButtonPark, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HVACButtonPark, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HVACButtonPark, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HVACButtonPark, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HVACButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_HVACButtonPark, &ui_img_temp32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_HVACButtonPark, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_HVACButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_HVACButtonPark, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ParkingButtonPark = lv_btn_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_ParkingButtonPark, 50);
+    lv_obj_set_height(ui_ParkingButtonPark, 50);
+    lv_obj_set_x(ui_ParkingButtonPark, -135);
+    lv_obj_set_y(ui_ParkingButtonPark, 93);
+    lv_obj_set_align(ui_ParkingButtonPark, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ParkingButtonPark, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_ParkingButtonPark, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_ParkingButtonPark, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_ParkingButtonPark, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ParkingButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_ParkingButtonPark, &ui_img_park32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_ParkingButtonPark, lv_color_hex(0x5587C6), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_ParkingButtonPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_ParkingButtonPark, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_currentTimePark = lv_label_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_currentTimePark, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentTimePark, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentTimePark, -135);
+    lv_obj_set_y(ui_currentTimePark, -100);
+    lv_obj_set_align(ui_currentTimePark, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentTimePark, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentTimePark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_currentTimePark, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_currentDatePark = lv_label_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_currentDatePark, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentDatePark, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentDatePark, 3);
+    lv_obj_set_y(ui_currentDatePark, -101);
+    lv_obj_set_align(ui_currentDatePark, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentDatePark, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentDatePark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ambientTemperatureLabelPark = lv_label_create(ui_FrontSensorScreen);
+    lv_obj_set_width(ui_ambientTemperatureLabelPark, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ambientTemperatureLabelPark, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ambientTemperatureLabelPark, -10);
+    lv_obj_set_y(ui_ambientTemperatureLabelPark, 13);
+    lv_obj_set_align(ui_ambientTemperatureLabelPark, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_ambientTemperatureLabelPark, "°C");
+    lv_obj_set_style_text_color(ui_ambientTemperatureLabelPark, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_ambientTemperatureLabelPark, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_ambientTemperatureLabelPark, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_HomeButtonPark, ui_event_HomeButtonPark, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_RadioButtonPark, ui_event_RadioButtonPark, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HVACButtonPark, ui_event_HVACButtonPark, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ParkingButtonPark, ui_event_ParkingButtonPark, LV_EVENT_ALL, NULL);
 
 }

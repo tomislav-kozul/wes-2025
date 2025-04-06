@@ -57,7 +57,11 @@ static void _gui_updater_task(void *p_parameter)
                     xQueueReceive(xAppEventQueue, &eventToRemove, 0);
                     if (pdTRUE == xSemaphoreTake(p_gui_semaphore, portMAX_DELAY)) {
                         snprintf(labelText, sizeof(labelText), "%2.1f \u00b0C", event.data.temp_reading.temperature);
-                        lv_label_set_text(ui_temperatureLabelAC, labelText);
+                        lv_label_set_text(ui_ambientTemperatureLabelHome, labelText);
+                        lv_label_set_text(ui_ambientTemperatureLabelPark, labelText);
+                        lv_label_set_text(ui_ambientTemperatureLabelRadio, labelText);
+                        lv_label_set_text(ui_ambientTemperatureLabelHVAC, labelText);
+                        lv_label_set_text(ui_ambientTemperatureLabelAC, labelText);
                         xSemaphoreGive(p_gui_semaphore);
                     }
                     break;

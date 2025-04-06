@@ -9,8 +9,8 @@ void ui_DriverSeatCtrlScreen_screen_init(void)
 {
     ui_DriverSeatCtrlScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_DriverSeatCtrlScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_DriverSeatCtrlScreen, lv_color_hex(0x9E9FA1), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_DriverSeatCtrlScreen, 125, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_DriverSeatCtrlScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_DriverSeatCtrlScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_img_opa(ui_DriverSeatCtrlScreen, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_left(ui_DriverSeatCtrlScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_pad_right(ui_DriverSeatCtrlScreen, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -75,79 +75,19 @@ void ui_DriverSeatCtrlScreen_screen_init(void)
     lv_obj_set_style_bg_color(ui_HVACButton1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_HVACButton1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsButton1 = lv_btn_create(ui_DriverSeatCtrlScreen);
-    lv_obj_set_width(ui_SettingsButton1, 40);
-    lv_obj_set_height(ui_SettingsButton1, 40);
-    lv_obj_set_x(ui_SettingsButton1, -136);
-    lv_obj_set_y(ui_SettingsButton1, 77);
-    lv_obj_set_align(ui_SettingsButton1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsButton1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsButton1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_radius(ui_SettingsButton1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_SettingsButton1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SettingsButton1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_temperatureLabel1 = lv_label_create(ui_DriverSeatCtrlScreen);
-    lv_obj_set_width(ui_temperatureLabel1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_temperatureLabel1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_temperatureLabel1, -9);
-    lv_obj_set_y(ui_temperatureLabel1, 9);
-    lv_obj_set_align(ui_temperatureLabel1, LV_ALIGN_TOP_RIGHT);
-    lv_label_set_text(ui_temperatureLabel1, "°C");
-    lv_obj_set_style_text_color(ui_temperatureLabel1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_temperatureLabel1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_temperatureLabel1, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Arc2 = lv_arc_create(ui_DriverSeatCtrlScreen);
-    lv_obj_set_width(ui_Arc2, 125);
-    lv_obj_set_height(ui_Arc2, 125);
-    lv_obj_set_x(ui_Arc2, 19);
-    lv_obj_set_y(ui_Arc2, 13);
-    lv_obj_set_align(ui_Arc2, LV_ALIGN_CENTER);
-    lv_arc_set_range(ui_Arc2, 16, 32);
-    lv_arc_set_value(ui_Arc2, 24);
-
-    lv_obj_set_style_bg_color(ui_Arc2, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Arc2, 255, LV_PART_KNOB | LV_STATE_DEFAULT);
-
-    ui_SetTemperature1 = lv_label_create(ui_Arc2);
-    lv_obj_set_width(ui_SetTemperature1, LV_SIZE_CONTENT);   /// 2
-    lv_obj_set_height(ui_SetTemperature1, LV_SIZE_CONTENT);    /// 2
-    lv_obj_set_x(ui_SetTemperature1, 1);
-    lv_obj_set_y(ui_SetTemperature1, -4);
-    lv_obj_set_align(ui_SetTemperature1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SetTemperature1, "24 °C");
-    lv_obj_set_style_text_color(ui_SetTemperature1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SetTemperature1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_letter_space(ui_SetTemperature1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_line_space(ui_SetTemperature1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SetTemperature1, &lv_font_montserrat_30, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_DriverSeatACButton = lv_btn_create(ui_DriverSeatCtrlScreen);
-    lv_obj_set_width(ui_DriverSeatACButton, 45);
-    lv_obj_set_height(ui_DriverSeatACButton, 45);
-    lv_obj_set_x(ui_DriverSeatACButton, 20);
-    lv_obj_set_y(ui_DriverSeatACButton, 78);
-    lv_obj_set_align(ui_DriverSeatACButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_DriverSeatACButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_DriverSeatACButton, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_DriverSeatACButton, lv_color_hex(0xA1A1A1), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_DriverSeatACButton, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_color(ui_DriverSeatACButton, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_opa(ui_DriverSeatACButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_DriverSeatACButton, lv_color_hex(0x3F93C6), LV_PART_MAIN | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_opa(ui_DriverSeatACButton, 255, LV_PART_MAIN | LV_STATE_CHECKED);
-
-    ui_DriverSeatACButtonLabel = lv_label_create(ui_DriverSeatACButton);
-    lv_obj_set_width(ui_DriverSeatACButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_DriverSeatACButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_DriverSeatACButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_DriverSeatACButtonLabel, "AC");
+    ui_ambientTemperatureLabelDriver = lv_label_create(ui_DriverSeatCtrlScreen);
+    lv_obj_set_width(ui_ambientTemperatureLabelDriver, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ambientTemperatureLabelDriver, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ambientTemperatureLabelDriver, -9);
+    lv_obj_set_y(ui_ambientTemperatureLabelDriver, 9);
+    lv_obj_set_align(ui_ambientTemperatureLabelDriver, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_ambientTemperatureLabelDriver, "°C");
+    lv_obj_set_style_text_color(ui_ambientTemperatureLabelDriver, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_ambientTemperatureLabelDriver, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_ambientTemperatureLabelDriver, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_HomeButton1, ui_event_HomeButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_RadioButton1, ui_event_RadioButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_HVACButton1, ui_event_HVACButton1, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Arc2, ui_event_Arc2, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_DriverSeatACButton, ui_event_DriverSeatACButton, LV_EVENT_ALL, NULL);
 
 }

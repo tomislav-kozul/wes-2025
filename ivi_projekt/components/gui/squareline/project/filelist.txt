@@ -9,6 +9,11 @@ ui.c
 components/ui_comp_hook.c
 ui_helpers.c
 ui_events.c
+images/ui_img_home_full_png.c
+images/ui_img_home32_png.c
+images/ui_img_radio32_png.c
+images/ui_img_temp32_png.c
+images/ui_img_park32_png.c
 images/ui_img_841796653.c
 images/ui_img_hvac_background_280x205_png.c
 images/ui_img_hvac_vents_240x205_png.c

@@ -9,6 +9,106 @@ void ui_RadioScreen_screen_init(void)
 {
     ui_RadioScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_RadioScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_RadioScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_RadioScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_HomeButtonRadio = lv_btn_create(ui_RadioScreen);
+    lv_obj_set_width(ui_HomeButtonRadio, 50);
+    lv_obj_set_height(ui_HomeButtonRadio, 50);
+    lv_obj_set_x(ui_HomeButtonRadio, -135);
+    lv_obj_set_y(ui_HomeButtonRadio, -57);
+    lv_obj_set_align(ui_HomeButtonRadio, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HomeButtonRadio, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HomeButtonRadio, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HomeButtonRadio, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HomeButtonRadio, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HomeButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_HomeButtonRadio, &ui_img_home32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_HomeButtonRadio, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_HomeButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_HomeButtonRadio, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_RadioButtonRadio = lv_btn_create(ui_RadioScreen);
+    lv_obj_set_width(ui_RadioButtonRadio, 50);
+    lv_obj_set_height(ui_RadioButtonRadio, 50);
+    lv_obj_set_x(ui_RadioButtonRadio, -135);
+    lv_obj_set_y(ui_RadioButtonRadio, -6);
+    lv_obj_set_align(ui_RadioButtonRadio, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_RadioButtonRadio, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_RadioButtonRadio, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_RadioButtonRadio, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_RadioButtonRadio, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_RadioButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_RadioButtonRadio, &ui_img_radio32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_RadioButtonRadio, lv_color_hex(0x5587C6), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_RadioButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_RadioButtonRadio, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_HVACButtonRadio = lv_btn_create(ui_RadioScreen);
+    lv_obj_set_width(ui_HVACButtonRadio, 50);
+    lv_obj_set_height(ui_HVACButtonRadio, 50);
+    lv_obj_set_x(ui_HVACButtonRadio, -135);
+    lv_obj_set_y(ui_HVACButtonRadio, 44);
+    lv_obj_set_align(ui_HVACButtonRadio, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_HVACButtonRadio, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_HVACButtonRadio, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_HVACButtonRadio, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_HVACButtonRadio, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_HVACButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_HVACButtonRadio, &ui_img_temp32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_HVACButtonRadio, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_HVACButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_HVACButtonRadio, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ParkingButtonRadio = lv_btn_create(ui_RadioScreen);
+    lv_obj_set_width(ui_ParkingButtonRadio, 50);
+    lv_obj_set_height(ui_ParkingButtonRadio, 50);
+    lv_obj_set_x(ui_ParkingButtonRadio, -135);
+    lv_obj_set_y(ui_ParkingButtonRadio, 93);
+    lv_obj_set_align(ui_ParkingButtonRadio, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_ParkingButtonRadio, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_ParkingButtonRadio, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_radius(ui_ParkingButtonRadio, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_ParkingButtonRadio, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_ParkingButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_ParkingButtonRadio, &ui_img_park32_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui_ParkingButtonRadio, lv_color_hex(0xA3A3A3), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui_ParkingButtonRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui_ParkingButtonRadio, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_currentTimeRadio = lv_label_create(ui_RadioScreen);
+    lv_obj_set_width(ui_currentTimeRadio, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentTimeRadio, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentTimeRadio, -135);
+    lv_obj_set_y(ui_currentTimeRadio, -100);
+    lv_obj_set_align(ui_currentTimeRadio, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentTimeRadio, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentTimeRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_currentTimeRadio, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_currentDateRadio = lv_label_create(ui_RadioScreen);
+    lv_obj_set_width(ui_currentDateRadio, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_currentDateRadio, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_currentDateRadio, 3);
+    lv_obj_set_y(ui_currentDateRadio, -101);
+    lv_obj_set_align(ui_currentDateRadio, LV_ALIGN_CENTER);
+    lv_obj_set_style_text_color(ui_currentDateRadio, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_currentDateRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_ambientTemperatureLabelRadio = lv_label_create(ui_RadioScreen);
+    lv_obj_set_width(ui_ambientTemperatureLabelRadio, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ambientTemperatureLabelRadio, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ambientTemperatureLabelRadio, -10);
+    lv_obj_set_y(ui_ambientTemperatureLabelRadio, 13);
+    lv_obj_set_align(ui_ambientTemperatureLabelRadio, LV_ALIGN_TOP_RIGHT);
+    lv_label_set_text(ui_ambientTemperatureLabelRadio, "°C");
+    lv_obj_set_style_text_color(ui_ambientTemperatureLabelRadio, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_ambientTemperatureLabelRadio, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_ambientTemperatureLabelRadio, LV_TEXT_ALIGN_RIGHT, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_HomeButtonRadio, ui_event_HomeButtonRadio, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_RadioButtonRadio, ui_event_RadioButtonRadio, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_HVACButtonRadio, ui_event_HVACButtonRadio, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_ParkingButtonRadio, ui_event_ParkingButtonRadio, LV_EVENT_ALL, NULL);
 
 }
